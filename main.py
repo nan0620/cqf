@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def test():
     # Define parameters
     S = 100
@@ -15,14 +16,14 @@ def test():
     random_numbers = np.random.standard_normal(N)
 
     # Initialize array to store simulated stock prices
-    stock_prices = np.zeros(N+1)
+    stock_prices = np.zeros(N + 1)
     stock_prices[0] = S
 
     # Simulate stock prices using Euler-Maruyama scheme
     for i in range(N):
         drift = r * stock_prices[i] * dt
         diffusion = sigma * stock_prices[i] * np.sqrt(dt) * random_numbers[i]
-        stock_prices[i+1] = stock_prices[i] + drift + diffusion
+        stock_prices[i + 1] = stock_prices[i] + drift + diffusion
 
     # Calculate payoff for Asian or lookback option
     payoff = np.maximum(stock_prices[-1] - E, 0)
@@ -70,6 +71,7 @@ def compute_price(S0, E, T, delta, r, num_simulations, num_steps):
     option_price = discount_factor * np.mean(option_prices)
     return option_price
 
+
 def calculate_asian_option_price(S0, E, T, delta, r, num_simulations, num_steps):
     option_price = compute_price(S0, E, T, delta, r, num_simulations, num_steps)
     discounted_option_price = np.exp(-r * T) * option_price
@@ -95,7 +97,8 @@ def calculate_lookback_option_price(S0, T, r, sigma, num_simulations):
     option_price = compute_price(S0, T, r, sigma, num_simulations)
     return option_price
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     S = 100  # 初始股票价格
     r = 0.05  # 无风险利率
     T = 1  # 期权到期时间
@@ -106,7 +109,7 @@ if __name__=='__main__':
     E = 100  # 期权执行价格
     num_simulations = 10000  # 模拟次数
 
-    option_price = compute_price(S, E, T, sigma, r, num_simulations, N)
+    option_price = compute_price(S, E, T, sigma, r)
     print("Asian Option Price:", option_price)
 
     option_price = calculate_asian_option_price(S, E, T, sigma, r, num_simulations, N)
