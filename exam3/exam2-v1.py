@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.stats import norm
 
 
 def simulate_path(s0, mu, sigma, horizon, timesteps, n_sims):
