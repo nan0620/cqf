@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>learnmd.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="cqf-exam-one">CQF Exam One</h1>
+<h2 id="question-1">Question 1</h2>
+<p>The budget constraint $\omega'$ 1 = 1 means $\omega$<sub>1</sub>+$\omega$<sub>2</sub> +$\omega$<sub>3</sub>+$\omega$<sub>4</sub> = 1</p>
+<p>Our goal is to minimise the variance of the portfolio, i.e. to minimise $\frac{1}{2}\omega'\Sigma\omega$, while satisfying the budget constraint $\omega$<sub>1</sub>+$\omega$<sub>2</sub> +$\omega$<sub>3</sub>+$\omega$<sub>4</sub> = 1.</p>
+<p>The objective of the Lagrange multiplier method is to construct a Lagrange function and then minimise it.</p>
+<p>Below is the detailed process to derive the analytical solution for optimal allocations ${\omega}^{*}$.</p>
+<p>The Lagrangian multiplier method is</p>
+<p>$L(\omega,\lambda)=\frac{1}{2}\omega'\Sigma\omega+\lambda(1-\omega'1)$.</p>
+<p>Where $\lambda$ is the Lagrangian multiplier. I now compute the Lagrangian function for The partial derivatives of $\lambda$,${\omega}<em>{1}$,${\omega}</em>{2}$,${\omega}<em>{3}$,${\omega}</em>{4}$ and make them equal to zero to solve the optimal solution.</p>
+<ol>
+<li>Take the partial derivative of $\omega$ and make it zero.
+$$
+\begin{aligned}</li>
+</ol>
+<p>\frac{\partial L}{\partial\omega}&amp;=\frac{\partial \frac{1}{2}\omega'\Sigma\omega+\lambda(1-\omega'1)}{\partial\omega}\
+&amp;=\Sigma\omega+\lambda1,(cause:f(T)=TA'T,then:\frac{\partial f(T)}{\partial T}=2AT)\
+&amp;=0
+\end{aligned}
+$$</p>
+<ol start="2">
+<li>Take the partial derivative of $\lambda$ and make it zero.
+$$
+\begin{aligned}</li>
+</ol>
+<p>\frac{\partial L}{\partial\lambda}&amp;=\frac{\partial \frac{1}{2}\omega'\Sigma\omega+\lambda(1-\omega'1)}{\partial\lambda}\
+&amp;=1'\omega-1\
+&amp;=0
+\end{aligned}
+$$</p>
+<ol start="3">
+<li>
+<p>Now I have the set of equations, where 1 is the all-1 column vector.
+$$
+\begin{cases}
+\Sigma\omega+\lambda1=0,①\
+1'\omega-1=0,②\
+\end{cases}
+$$</p>
+</li>
+<li>
+<p>Next, I will compute $\lambda$. According to equation①,
+$$
+\Sigma\omega+\lambda1=0\
+{\Sigma}^{-1}\Sigma\omega+{\Sigma}^{-1}\lambda1=0\
+\omega+{\Sigma}^{-1}\lambda1=0\
+\omega=-\lambda{\Sigma}^{-1}1
+$$</p>
+</li>
+<li>
+<p>Next, I will substitute $\omega$ into equation②.
+$$
+1'(-\lambda{\Sigma}^{-1}1)-1=0\
+\lambda=\frac{1}{1'{\Sigma}^{-1}1}
+$$</p>
+</li>
+<li>
+<p>Next, I will substitute $\lambda$ into equation①.
+$$\Sigma\omega+\frac{1}{1'{\Sigma}^{-1}1}1=0$$
+$${\Sigma}^{-1}\Sigma\omega+\frac{{\Sigma}^{-1}}{1'{\Sigma}^{-1}1}1=0$$
+$${\omega}^{*}=\frac{{\Sigma}^{-1}1}{1'{\Sigma}^{-1}1}
+$$</p>
+</li>
+</ol>
+<p>This is the analytic solution for optimal allocations ${\omega}^{*}=\frac{{\Sigma}^{-1}1}{1'{\Sigma}^{-1}1}$.</p>
+<h2 id=""></h2>
+<p>Then I will compute optimal allocations (Global MV portfolio) for the given investment universe.</p>
+<ol>
+<li>
+<p>First compute $\Sigma$.
+$$
+\Sigma=diag(\sigma)<em>Corr</em>diag(\sigma)\
+,where\ diag(\sigma) is\ the\ diagonal\ matrix\ containing\ the\ standard\ deviation.\
+\begin{aligned}
+\Sigma&amp;=
+\begin{pmatrix}<br>
+0.07<em>0.07</em>1 &amp; 0.07<em>0.28</em>0.4 &amp; 0.07<em>0.25</em>0.3 &amp; 0.07<em>0.31</em>0.3\<br>
+0.28<em>0.07</em>0.4 &amp; 0.28<em>0.28</em>1 &amp; 0.28<em>0.25</em>0.27 &amp; 0.28<em>0.31</em>0.42\<br>
+0.25<em>0.07</em>0.3 &amp; 0.25<em>0.28</em>0.27 &amp; 0.25<em>0.25</em>1 &amp; 0.25<em>0.31</em>0.5\
+0.31<em>0.07</em>0.3 &amp; 0.31<em>0.28</em>0.42 &amp; 0.31<em>0.25</em>0.5 &amp; 0.31<em>0.31</em>1\
+\end{pmatrix}\
+&amp;=\begin{pmatrix}
+0.0049  &amp; 0.00784  &amp; 0.00525 &amp; 0.00651 \
+0.00784 &amp; 0.0784   &amp; 0.0189  &amp; 0.036456\
+0.00525 &amp; 0.0189   &amp; 0.0625  &amp; 0.03875 \
+0.00651 &amp; 0.036456 &amp; 0.03875 &amp; 0.0961  \
+\end{pmatrix}
+\end{aligned}
+$$</p>
+</li>
+<li>
+<p>The following steps are more complex and I will calculate them using python's numpy library.</p>
+</li>
+</ol>
+<pre class="hljs"><code><div>import numpy as np
+
+# Defining asset information
+mu = np.array([0.05, 0.07, 0.15, 0.22])
+sigma = np.array([0.07, 0.28, 0.25, 0.31])
+w = np.array([0.25, 0.25, 0.25, 0.25])
+
+# Define the correlation matrix
+corr = np.array([[1, 0.4, 0.3, 0.3],
+                 [0.4, 1, 0.27, 0.42],
+                 [0.3, 0.27, 1, 0.5],
+                 [0.3, 0.42, 0.5, 1]])
+
+# Calculate the covariance matrix
+cov = np.diag(sigma) @ corr @ np.diag(sigma)
+
+# Compute eigenvalues and eigenvectors
+eigvals, eigvecs = np.linalg.eig(cov)
+</div></code></pre>
+<p>$$eigvals=[0.14707938, 0.0038642, 0.05460673, 0.0363497]$$
+$$
+eigvecs=
+\begin{pmatrix}
+-0.07828434 &amp; -0.994989 &amp; 0.04215969 &amp; -0.04572765 \
+-0.51697024 &amp; -0.08406065 &amp; -0.83359425 &amp; 0.17548846 \
+-0.45160342 &amp; 0.05196731 &amp; 0.44744562 &amp; -0.77015983 \
+-0.7229576 &amp; 0.01516905 &amp; -0.32114732 &amp; 0.6115281 \
+\end{pmatrix}
+$$</p>
+<ol start="3">
+<li>use python cvxpy library</li>
+</ol>
+<pre class="hljs"><code><div>import cvxpy as cp
+
+w = cp.Variable(4)
+objective = cp.Minimize(cp.quad_form(w, cov))
+constraints = [cp.sum(w) == 1, w &gt;= 0]
+</div></code></pre>
+<p>In the above code, cp.Minimize(cp.quad_form($\omega$, $\Sigma$)) means to minimise the quadratic function $\omega'\Sigma\omega$ as an objective function. This objective function is the objective function of the global minimum variance portfolio problem, where $\omega$ is the weight vector of the portfolio and $\Sigma$ is the covariance matrix. Therefore, by minimising $\omega'\Sigma\omega$, the weight vector of the global minimum variance portfolio can be obtained.</p>
+<ol start="4">
+<li>compute optimal allocations</li>
+</ol>
+<pre class="hljs"><code><div>prob = cp.Problem(objective, constraints)
+prob.solve()
+print(w.value)
+</div></code></pre>
+<ol start="5">
+<li>The optimal allocations is $$[0.201, 0.187, 0.312, 0.200]$$. That is, the optimal asset allocation is 20.1% weighting of asset A, 18.7% weighting of asset B, 31.2% weighting of asset C and 20.0% weighting of asset D.</li>
+</ol>
+<div STYLE="page-break-after: always;"></div>
+<h2 id="question-2">Question 2</h2>
+<p>The problem can be solved by Lagrange multiplier method.</p>
+<ol>
+<li>First, the objective function can be expressed as follows:</li>
+</ol>
+<p>$$L(\omega,\lambda_1,\lambda_2) = \frac{1}{2}\omega^T\sum \omega - \lambda_1(\omega^T1-1) - \lambda_2(\omega^T\mu-m)$$</p>
+<p>where $\omega$ is the weight vector, $\sum$ is the covariance matrix, $\mu$ is the expected return vector, $m$ is the target return, and $\lambda_1$ and $\lambda_2$ are the Lagrange multipliers. The following problem needs to be solved:</p>
+<p>$$\min_\omega L(\omega,\lambda_1,\lambda_2)$$</p>
+<ol start="2">
+<li>Derivate $\omega$ to get:</li>
+</ol>
+<p>$$\frac{\partial L}{\partial \omega} = \Sigma \omega - \lambda_1 1 - \lambda_2 \mu = 0$$
+$$
+\omega = {\Sigma}^{-1}(\lambda_1 1 + \lambda_2 \mu)\
+\omega={\Sigma}^{-1}(\lambda_{1}1+\lambda_2\mu)
+$$</p>
+<ol start="3">
+<li>
+<p>Multiplying both sides by $1'$ simultaneously gives.
+$$1'\omega=1'\Sigma^{-1}(\lambda_{1}1+\lambda_2\mu)\
+cause: 1'\omega=1\
+therefore:1=\lambda_{1}1'\Sigma^{-1}1+\lambda_21'\Sigma^{-1}\mu,①
+$$</p>
+</li>
+<li>
+<p>Multiply both sides simultaneously by $\mu'$ to obtain:
+$$
+\mu'\omega=\mu'\Sigma^{-1}(\lambda_{1}1+\lambda_2\mu)\
+cause:\mu'\omega=m\
+therefore:m=\lambda_{1}\mu'\Sigma^{-1}1+\lambda_{2}\mu'\Sigma^{-1}\mu,②
+$$</p>
+</li>
+<li>
+<p>Thus the set of equations is obtained:
+$$
+\begin{cases}
+1=\lambda_{1}1'\Sigma^{-1}1+\lambda_21'\Sigma^{-1}\mu,①\
+m=\lambda_{1}\mu'\Sigma^{-1}1+\lambda_{2}\mu'\Sigma^{-1}\mu,②\
+\end{cases}
+$$</p>
+</li>
+<li>
+<p>Solve using the commutative method and simplify the calculations by defining three constants A, B and C:
+$$
+\begin{cases}
+A=1'\Sigma^{-1}1\
+B=1'\Sigma^{-1}\mu\
+C=\mu'\Sigma^{-1}\mu
+\end{cases}
+$$</p>
+</li>
+<li>
+<p>So the system of equations is transformed:
+$$
+\begin{cases}
+\lambda_{1}A+\lambda_{2}B=1\
+\lambda_{1}B+\lambda_{2}C=m
+\end{cases}
+$$</p>
+</li>
+<li>
+<p>Solve for $\lambda_{1}$ and $\lambda_{2}$ by Cramer's Law:
+$$\lambda_{1} = \frac{\begin{vmatrix}1&amp;B\ m&amp;C\end{vmatrix}}{\begin{vmatrix}A&amp;B\ B&amp;C\end{vmatrix}}=\frac{C-mB}{AC-B^2}$$
+$$\lambda_{2}= \frac{\begin{vmatrix}A&amp;1\ B&amp;m\end{vmatrix}}{\begin{vmatrix}A&amp;B\ B&amp;C\end{vmatrix}} = \frac{mA-B}{AC-B^2}$$</p>
+</li>
+<li>
+<p>Define $\Delta=AC-B^{2}$, obtained to simplify the calculation:
+$$
+\omega^{<em>}=\Sigma^{-1}(\frac{C-mB}{\Delta})1+\frac{mA-B}{\Delta}\Sigma^{-1}\mu\
+$$
+$$
+\omega^{</em>}=\frac{C-mB}{\Delta}\Sigma^{-1}1+\frac{mA-B}{\Delta}\Sigma^{-1}\mu
+$$</p>
+</li>
+</ol>
+<p>Now, I take all these constants into the $\omega^{<em>}$ formula and simplify it, then have:
+$$\omega^</em> = \frac{1}{4}\Sigma^{-1}(\mu - m\frac{\Sigma^{-1}\mu}{\mu'\Sigma^{-1}\mu})$$</p>
+<h2 id=""></h2>
+<ol start="10">
+<li>Calculate $\sigma^{2}$ to get:
+$$
+\begin{aligned}
+\sigma^{2}&amp;=\omega'\Sigma\omega\
+&amp;=\omega'\Sigma(\frac{C-mB}{\Delta}\Sigma^{-1}1+\frac{mA-B}{\Delta}\Sigma^{-1}\mu)\
+&amp;=\frac{C-mB}{\Delta}\omega'\Sigma\Sigma^{-1}1+\frac{mA-B}{\Delta}\omega'\Sigma\Sigma^{-1}\mu\
+&amp;=\frac{C-mB}{\Delta}\omega'1+\frac{mA-B}{\Delta}\omega'\mu\
+&amp;=\frac{C-mB}{\Delta}+\frac{mA-B}{\Delta}m\
+&amp;=\frac{Am^{2}-2mB+C}{\Delta}\
+&amp;=\frac{A}{\Delta}(m-\frac{B}{A})^{2}+\frac{1}{A}\
+\end{aligned}
+$$</li>
+</ol>
+<p>Therefore, when $m=\frac{B}{A}$, the minumn of portfolio risk $\sigma_{\prod}=\sqrt{\omega'\Sigma\omega}=\sqrt{\frac{A}{\Delta}(m-\frac{B}{A})^{2}+\frac{1}{A}}=\sqrt{\frac{1}{A}}$</p>
+<h2 id=""></h2>
+<p>Next, I will compute the portfolio risk for three levels of correlation.</p>
+<p>The scaling factors $x$ are 1, 1.3 and 1.8 respectively. The initial correlation matrix $\rho$ is:</p>
+<p>$$\rho = \begin{bmatrix}
+1 &amp; 0.4 &amp; 0.3 &amp; 0.3 \
+0.4 &amp; 1 &amp; 0.27 &amp; 0.42 \
+0.3 &amp; 0.27 &amp; 1 &amp; 0.5 \
+0.3 &amp; 0.42 &amp; 0.5 &amp; 1
+\end{bmatrix}
+$$</p>
+<p>For each element $\rho_{ij}$, the following rules will be applied to calculate the scaled value $\rho_{scaled_{ij}}$:</p>
+<p>$$
+\rho_{scaled_{ij}} = \begin{cases}
+\rho_{ij} \times x, &amp; \text{如果} \ \rho_{ij} \times x \leq 0.99 \
+0.99, &amp; \text{如果} \ \rho_{ij} \times x &gt; 0.99
+\end{cases}
+$$</p>
+<h2 id=""></h2>
+<ol>
+<li>Calculate the scaled correlation matrix $\rho_{scaled}$.</li>
+</ol>
+<p>When $x=1$, $\rho_{scaled}=\rho$.
+$$\rho_{scaled} = \begin{bmatrix}
+1 &amp; 0.4 &amp; 0.3 &amp; 0.3 \
+0.4 &amp; 1 &amp; 0.27 &amp; 0.42 \
+0.3 &amp; 0.27 &amp; 1 &amp; 0.5 \
+0.3 &amp; 0.42 &amp; 0.5 &amp; 1
+\end{bmatrix}
+$$</p>
+<p>When $x=1.3$, $\rho_{scaled}=\rho$.
+$$\rho_{scaled} = \begin{bmatrix}
+1 &amp; 0.52 &amp; 0.39 &amp; 0.39 \
+0.52 &amp; 1 &amp; 0.351 &amp; 0.546 \
+0.39 &amp; 0.351 &amp; 1 &amp; 0.5 \
+0.39 &amp; 0.546 &amp; 0.5 &amp; 1
+\end{bmatrix}
+$$
+When $x=1.8$, $\rho_{scaled}=\rho$.
+$$\rho_{scaled} = \begin{bmatrix}
+1 &amp; 0.72 &amp; 0.54 &amp; 0.54 \
+0.72 &amp; 1 &amp; 0.486 &amp; 0.756 \
+0.54 &amp; 0.486 &amp; 1 &amp; 0.9 \
+0.54 &amp; 0.756 &amp; 0.9 &amp; 1
+\end{bmatrix}
+$$</p>
+<ol start="2">
+<li>
+<p>Calculate the portfolio risk $\sigma_{\Pi} = \sqrt{\omega^T \Sigma \omega}$.</p>
+<p>For each scaling factor $x$, follow the steps below to calculate portfolio risk:</p>
+<p>a. Calculate the covariance matrix $\Sigma$<br>
+b. Calculate the inverse matrix of the covariance matrix $\Sigma^{-1}$<br>
+c. Calculate the optimal weights $\omega^<em>$<br>
+$\omega^</em><em>{x=1} = [0.05600229, 0.30339868, 0.33581183, 0.3047872]$<br>
+$\omega^*</em>{x=1.3} = [0.04805233, 0.2968552, 0.32851019, 0.32658228]$<br>
+$\omega^*_{x=1.8} = [0.0301677, 0.26687096, 0.30849996, 0.39446139]$\</p>
+<p>d. Calculate portfolio risk $\sigma_{\Pi} = \sqrt{\omega^{<em>T} \Sigma \omega^</em>}$:<br>
+$\sigma_{\Pi,x=1} = 0.24243704960178165$\<br>
+$\sigma_{\Pi,x=1.3} = 0.22374124592736818$\<br>
+$\sigma_{\Pi,x=1.8} = 0.22308884699769566$\</p>
+</li>
+<li>
+<p>Organise the results of the calculations in a table:
+| $x$ | $\rho_{scaled}$ | $\omega^*$                                      | $\sigma_{\Pi}$      |
+| --- | --------------- | ----------------------------------------------- | ------------------- |
+| 1   | see above       | [0.05600229, 0.30339868, 0.33581183, 0.3047872] | 0.24243704960178165 |
+| 1.3 | see above       | [0.04805233, 0.2968552, 0.32851019, 0.32658228] | 0.24243704960178165 |
+| 1.8 | see above       | [0.0301677, 0.26687096, 0.30849996, 0.39446139] | 0.24243704960178165 |</p>
+</li>
+</ol>
+<div STYLE="page-break-after: always;"></div>
+<h2 id="question-3">Question 3</h2>
+<h3 id="sub-question-1">Sub-Question 1</h3>
+<p>The Sharpe Ratio is a measure of a portfolio's risk-adjusted return, defined as the ratio of a portfolio's expected return to its risk (standard deviation). The formula for calculating the Sharpe ratio is:</p>
+<p>$$
+Sharpe\ Ratio = \frac{E(R_p - R_f)}{\sigma_p}
+$$</p>
+<p>where:</p>
+<ul>
+<li>$E(R_p - R_f)$ is the portfolio's expected excess return (the portfolio's expected return minus the risk-free rate of return);</li>
+<li>$\sigma_p$ is the standard deviation (risk) of the portfolio.</li>
+</ul>
+<p>In this formula, the main parameters that scale over time are the expected excess return $R_p$ and the standard deviation $\sigma_p$.</p>
+<h3 id="sub-question-2">Sub-Question 2</h3>
+<ul>
+<li>
+<p>Daily Sharpe Ratio:
+$$=0.53 \times \sqrt{252}=8.4135
+\ (Assuming\ 252\ trading\ days\ in\ a\ year)$$</p>
+</li>
+<li>
+<p>Monthly Sharpe Ratio:
+$$0.53 \times \sqrt{12}=1.8360
+\ (Assuming\ 12\ months\ in\ a\ year)$$</p>
+</li>
+<li>
+<p>Quarterly Sharpe Ratio:
+$$0.53 \times \sqrt{4}=1.06
+\ (Assuming\ 4\ quarters\ in\ a\ year)$$</p>
+</li>
+</ul>
+<h3 id="sub-question-3">Sub-Question 3</h3>
+<p>For each time scale, the loss probability can be calculated by setting the value of the standard normal random variable $x$ to the corresponding negative Sharpe\ Ratio$ and then calculating the probability that $x$ is less than or equal to this value.</p>
+<p>$$Loss\ Probability = Pr(x &lt; -Sharpe\ Ratio)$$</p>
+<p>Calculations were made directly using the standard normal distribution table:</p>
+<pre class="hljs"><code><div>import scipy.stats as stats
+
+# Given annualized Sharpe Ratio
+annualized_SR = 0.53
+
+# Calculate time scale adjustment factors
+daily_adj_factor = annualized_SR / (252 ** 0.5)  # Assuming 252 trading days in a year
+monthly_adj_factor = annualized_SR / (12 ** 0.5)  # Assuming 12 months in a year
+quarterly_adj_factor = annualized_SR / (4 ** 0.5)  # Assuming 4 quarters in a year
+annually_adj_factor = annualized_SR
+
+# Calculate loss probabilities using standard normal distribution CDF
+daily_loss_prob = stats.norm.cdf(-daily_adj_factor)
+monthly_loss_prob = stats.norm.cdf(-monthly_adj_factor)
+quarterly_loss_prob = stats.norm.cdf(-quarterly_adj_factor)
+annually_loss_prob = stats.norm.cdf(-annually_adj_factor)
+
+print(&quot;Daily Loss Probability:&quot;, daily_loss_prob)
+print(&quot;Monthly Loss Probability:&quot;, monthly_loss_prob)
+print(&quot;Quarterly Loss Probability:&quot;, quarterly_loss_prob)
+print(&quot;Annually Loss Probability:&quot;, annually_loss_prob)
+</div></code></pre>
+<p>The output is:</p>
+<pre class="hljs"><code><div>Daily Loss Probability: 0.4866830433008509
+Monthly Loss Probability: 0.439199996693031
+Quarterly Loss Probability: 0.395504730907446
+Annually Loss Probability: 0.29805596539487644
+</div></code></pre>
+<p>Therefore, evaluating the P&amp;L more frequently make it appear more risky than it actually is.</p>
+<div STYLE="page-break-after: always;"></div>
+<h2 id="question-4">Question 4</h2>
+<pre class="hljs"><code><div>import numpy as np
+import matplotlib.pyplot as plt
+
+# Set the random seed for reproducibility
+np.random.seed(42)
+
+# Generate 700 random allocation sets (4x1 vectors)
+num_sets = 1000
+allocation_sets = np.random.randn(num_sets, 4)
+print(allocation_sets)
+
+# Standardize each allocation set
+normalized_sets = allocation_sets / np.sum(allocation_sets, axis=1, keepdims=True)
+
+# Compute expected returns and standard deviations for each set
+mu = np.array([0.05, 0.07, 0.15, 0.22])
+sigma = np.array([0.07, 0.28, 0.25, 0.31])
+
+# Define the correlation matrix
+corr = np.array([[1, 0.4, 0.3, 0.3],
+                 [0.4, 1, 0.27, 0.42],
+                 [0.3, 0.27, 1, 0.5],
+                 [0.3, 0.42, 0.5, 1]])
+
+# Calculate the covariance matrix
+cov_matrix = np.diag(sigma) @ corr @ np.diag(sigma)
+
+# Expected returns for assets
+mu_portfolio = np.dot(normalized_sets, mu)
+sigma_portfolio = np.sqrt(np.diag(np.dot(np.dot(normalized_sets, cov_matrix), normalized_sets.T)))
+
+# Plot the cloud of points
+# This line of code creates a new graphics window and sets its size to 8 inches wide by 6 inches high.
+plt.figure(figsize=(8, 6))
+
+# This line of code uses the scatter() function to plot a scatterplot. sigma_portfolio and mu_portfolio are two arrays representing the standard deviation and expected return of the portfolio, respectively. the alpha parameter sets the transparency of the points, which is set to 0.6 here.
+plt.scatter(sigma_portfolio, mu_portfolio, alpha=0.6)
+
+plt.xlabel('σΠ (Portfolio Standard Deviation)')
+plt.ylabel('µΠ (Portfolio Expected Return)')
+plt.title('Portfolio Risk-Return Trade-off')
+plt.grid(True)
+plt.xlim(0, 0.5)  # Set x-axis limits
+plt.ylim(-0.3, 0.3)  # Set y-axis limits
+plt.show()
+
+</div></code></pre>
+<p><img src="image.png" alt="Alt text">
+The Risk &amp; Return chart is similar in concept to a classic efficient frontier image that maps the average return and standard deviation tradeoffs for any combination of assets. It is an elliptical curve with the upper half being the effective frontier. The points on the left boundary of the efficient frontier are called the global minimum variance portfolio (GMVP).</p>
+<div STYLE="page-break-after: always;"></div>
+<h2 id="question-5">Question 5</h2>
+<h3 id="sub-question-a-c">Sub Question (a)-(c)</h3>
+<p>I use the Excel formulas to compute, details can see in the excel file and the Question5 sheet.
+$$Except\ 1.00%\ OR\ 13.5\ breaches\ $$
+$$Actual(10D)\ 2.52%\ OR\ 34\ breaches\ $$
+$$Consecutive\ VaR\ breaches\ 18\ $$
+<img src="image-1.png" alt="Alt text"></p>
+<h3 id="sub-question-d">Sub Question (d)</h3>
+<p>Between 2020/2 and 2020/3, the prediction of 99%/10D Value at Risk is relatively flat. And relative to other times, its prediction is also lower, influenced by the Covid-19 pandemic. Whereas the actual Forward 10D Log Return is higher and there are no VaR Breaches. there is a large increase at the beginning of 2020/3, possibly due to the belief that the impact of the Covid-19 pandemic will not be significant, but then there is a large fall, suggesting that capital is beginning to lack confidence. All in all, the capital market was more volatile and investment risk was higher in the early period due to the impact of Covid-19.</p>
+<p><img src="image-2.png" alt="Alt text"></p>
+<h2 id="question-6">Question 6</h2>
+<h3 id="sub-question-a-c">Sub Question (a)-(c)</h3>
+<p>I use the Excel formulas to compute, details can see in the excel file and the Question6 sheet.
+$$Except\ 1.00%\ OR\ 13.5\ breaches\ $$
+$$Actual(10D)\ 3.58%\ OR\ 49\ breaches,\ Consecutive\ VaR\ breaches\ 22$$</p>
+<p><img src="image-3.png" alt="Alt text"></p>
+<h3 id="sub-question-d">Sub Question (d)</h3>
+<p>The parameter λ in an exponentially weighted moving average (EWMA) model controls the weight assigned to past observations in forecasting volatility. Smaller values of λ lead to smoother forecasts by giving more weight to historical observations. This can lead to a slower response to recent changes in volatility. Conversely, larger values of λ give more weight to recent observations, making forecasts more responsive but potentially less stable due to greater sensitivity to noise in the data.The choice of λ depends on the trade-off between responsiveness to recent changes and stability of volatility forecasts.
+Whereas Q5 and Q6 are predicted using two different methods, the number of VaR breaches predicted using EWMA is higher than the number of VaR Beaches predicted using Historical Simulation, this is because EWMA predictions are based on a weighted average of the historical observations, focusing more on the recent data, and therefore may be more sensitive to short-term volatility changes. In contrast, the formula VaR_{10D,t} uses a longer time window (10 days) in the calculation of VaR and therefore focuses more on long-term trends. If EWMA is used based on a 30-day time window, then fewer VaR Breaches will be calculated. The calculation is as follows.</p>
+<p>$$Actual(30D)\ 0.66%\ OR\ 9\ breaches,\ Consecutive\ VaR\ breaches\ 7$$</p>
+
+</body>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
+</html>
