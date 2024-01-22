@@ -1,25 +1,25 @@
 import os
 import pandas as pd
 
-# 设置包含CSV文件的文件夹路径
+# Set the folder path containing CSV files
 folder_path = '/Users/nanjiang/cqf/spx_eod_handled'
 
-# 创建一个空的DataFrame列表，用于存储每个CSV文件的数据
+# Create an empty list of DataFrames to store data from each CSV file
 dataframes = []
 
-# 遍历文件夹中的所有CSV文件并按顺序读取到DataFrame列表中
+# Traverse all CSV files in the folder and read them into the list of DataFrames
 file_list = sorted([filename for filename in os.listdir(folder_path) if filename.endswith('.csv')])
 for filename in file_list:
     file_path = os.path.join(folder_path, filename)
-    # 读取CSV文件并将其添加到DataFrame列表中
+    # Read the CSV file and append it to the list of DataFrames
     df = pd.read_csv(file_path)
     dataframes.append(df)
 
-# 使用concat函数将DataFrame列表合并成一个大的DataFrame
+# Use the concat function to merge the list of DataFrames into one large DataFrame
 combined_df = pd.concat(dataframes, ignore_index=True)
 
-# 将合并后的DataFrame保存为一个新的CSV文件
+# Save the merged DataFrame as a new CSV file
 combined_csv_path = '/Users/nanjiang/cqf/spx_eod_2021-2023_combined.csv'
 combined_df.to_csv(combined_csv_path, index=False)
 
-print(f'合并后的CSV文件已保存为：{combined_csv_path}')
+print(f'The merged CSV file has been saved as: {combined_csv_path}')
