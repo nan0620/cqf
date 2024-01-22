@@ -1,7 +1,12 @@
+from concurrent.futures import ProcessPoolExecutor
+from multiprocessing import cpu_count
+
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from scipy.optimize import minimize
+from tqdm import tqdm
+from tqdm.contrib.concurrent import process_map
 
 # # 步骤 1: 整理数据并计算必要的变量
 # # 加载CSV文件
@@ -34,15 +39,15 @@ from scipy.optimize import minimize
 # data.to_csv('/Users/nanjiang/cqf/processed_option_data.csv', index=False)
 
 # 步骤 2: 计算依赖变量和运行拟合
-data = pd.read_csv('/Users/nanjiang/cqf/processed_option_data.csv', low_memory=False)
+data = pd.read_csv('processed_option_data.csv', low_memory=False)
 # 首行的∆St和∆Vt将为NaN，需要被剔除
 data.dropna(inplace=True)
 
 
 # 定义模型函数
 def model(params, X):
-    a, b, c, d, e, f = params
-    return a * X['C_DELTA'] + b * X['C_DELTA'] * X['C_DELTA'] + c * X['∆St'] + d * X['C_IV'] + e * X['C_VEGA'] + f
+    a, b, c = params
+    return a * X['C_IV'] + b * X['C_DELTA'] + c * X['C_VEGA']
 
 
 # 定义损失函数
@@ -52,12 +57,12 @@ def loss_function(params, X, Y):
 
 
 # 准备自变量X和因变量Y
-X = data[['C_DELTA', 'C_DELTA_2', '∆St', 'C_IV', 'C_VEGA']]
+X = data[['C_IV', 'C_DELTA', 'C_VEGA', '∆Vt']]
 Y = data['∆Vt']
 
 # 使用SLSQP进行优化
 # 初始参数猜测
-initial_guess = [0, 0, 0, 0, 0, 0]
+initial_guess = np.array([0.1, 0.1, 0.1])
 
 # 运行优化器
 result = minimize(loss_function, initial_guess, args=(X, Y), method='SLSQP')
@@ -75,19 +80,44 @@ else:
 # 设置滚动窗口大小
 window_size = 3 * 22  # 3个月，每月约22个交易日
 
-# 滚动窗口估计
-rolling_params = []
-for start in range(len(data) - window_size + 1):
+
+# 定义处理每个窗口的函数
+def process_window(start, data, window_size, initial_guess):
     end = start + window_size
     window_data = data.iloc[start:end]
-    result = minimize(loss_function, initial_guess, args=(window_data[['C_DELTA', 'C_IV', 'C_VEGA']], window_data['∆Vt']), method='SLSQP')
+    X_window = window_data[['C_DELTA', 'C_IV', 'C_VEGA']]
+    Y_window = window_data['∆Vt']
+    result = minimize(loss_function, initial_guess, args=(X_window, Y_window), method='SLSQP')
     if result.success:
-        rolling_params.append(result.x)
+        return result.x
     else:
-        rolling_params.append([np.nan, np.nan, np.nan, np.nan, np.nan, np.nan])  # 如果优化失败，添加NaN
+        # 如果优化失败，添加NaN。注意这里是3个NaN，因为我们有3个参数
+        return [np.nan, np.nan, np.nan]
 
-# 将滚动参数转换为DataFrame
-rolling_params_df = pd.DataFrame(rolling_params, columns=['a', 'b', 'c', 'd', 'e', 'f'])
+
+# 获取CPU核心数
+num_cores = cpu_count()
+
+# 使用process_map来并行处理
+results = process_map(process_window, range(len(data) - window_size + 1), [data] * (len(data) - window_size + 1), [window_size] * (len(data) - window_size + 1),
+                      [initial_guess] * (len(data) - window_size + 1), max_workers=5, chunksize=1)
+
+# 将结果转换为DataFrame
+rolling_params_df = pd.DataFrame(results, columns=['a', 'b', 'c'])
+
+# # 滚动窗口估计
+# rolling_params = []
+# for start in tqdm(range(len(data) - window_size + 1)):
+#     end = start + window_size
+#     window_data = data.iloc[start:end]
+#     result = minimize(loss_function, initial_guess, args=(window_data[['C_DELTA', 'C_IV', 'C_VEGA']], window_data['∆Vt']), method='SLSQP')
+#     if result.success:
+#         rolling_params.append(result.x)
+#     else:
+#         rolling_params.append([np.nan, np.nan, np.nan, np.nan, np.nan, np.nan])  # 如果优化失败，添加NaN
+#
+# # 将滚动参数转换为DataFrame
+# rolling_params_df = pd.DataFrame(rolling_params, columns=['a', 'b', 'c'])
 
 # 步骤 4: 模型验证
 # 查看a, b, c的变化：使用回归作为拟合工具，并检查这些参数的统计显著性。
@@ -101,12 +131,12 @@ plt.show()
 
 import numpy as np
 
-# 计算模型估计的Delta
-data['δMV'] = np.nan  # 创建一个新列来存储模型估计的Delta
-for i in range(len(data)):
-    row = data.iloc[i]
-    params = rolling_params_df.iloc[i]  # 使用滚动估计的参数
-    data.at[i, 'δMV'] = model(params, row[['C_DELTA', 'C_IV', 'C_VEGA']])
+# # 计算模型估计的Delta
+# data['δMV'] = np.nan  # 创建一个新列来存储模型估计的Delta
+# for i in range(len(data)):
+#     row = data.iloc[i]
+#     params = rolling_params_df.iloc[i]  # 使用滚动估计的参数
+#     data.at[i, 'δMV'] = model(params, row[['C_DELTA', 'C_IV', 'C_VEGA']])
 
 # 检查δMV−δBS的形状
 data['δMV_minus_δBS'] = data['δMV'] - data['C_DELTA']

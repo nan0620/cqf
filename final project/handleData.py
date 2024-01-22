@@ -52,37 +52,8 @@ for filename in os.listdir(directory):
         df = df[(df['C_DELTA'] > delta_min) & (df['C_DELTA'] < delta_max)]
         print("Number of rows:", len(df))
 
-        # # 计算模型参数a,b,c
-        # # 创建空列表来存储计算得到的a, b, c的值
-        # a_values = []
-        # b_values = []
-        # c_values = []
-        # # ΔV = a * delta + b * gamma +c
-        # # ΔV = 相邻两行的call_last的差
-        # df['DELTA_V'] = df['call_last'].diff()
-        # # 手动将第一行的ΔV设置为零
-        # df['DELTA_V'].iloc[0] = 0
-        # for index, row in df.iterrows():
-        #     # 提取需要的列数据
-        #     delta = row['C_DELTA']
-        #     gamma = row['C_GAMMA']
-        #     delta_v = row['DELTA_V']
-        #     # 使用最小二乘法计算a, b, c
-        #     x = np.array([delta, gamma])
-        #     y = np.array(delta_v)
-        #     slope, intercept, r_value, p_value, std_err = linregress(x, y)
-        #     a_values.append(slope)
-        #     b_values.append(intercept)
-        #     c_values.append(0)  # c值暂时设为0，您可以根据需要修改
-        # # 将a, b, c的值添加到数据框中
-        # df['a'] = a_values
-        # df['b'] = b_values
-        # df['c'] = c_values
-        # # 打印包含新列的数据框
-        # print(df.head())
-
         # 处理完毕后保存到新的文件
-        new_file_path = os.path.join(processed_directory, 'processed_' + filename)
+        new_file_path = os.path.join(processed_directory, 'new_processed_' + filename)
         df.to_csv(new_file_path, index=False)
 
         print(f'文件 {filename} 已处理并保存为 {new_file_path}')
