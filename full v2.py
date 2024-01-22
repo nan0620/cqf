@@ -10,7 +10,6 @@ from sobol_seq import i4_sobol_generate
 from tqdm.contrib.concurrent import process_map
 
 # 步骤 1: 整理数据并计算必要的变量
-# ...（保持不变）...
 df = pd.read_csv('processed_option_data.csv', low_memory=False)
 
 # 步骤 2: 使用新模型进行模拟
