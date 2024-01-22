@@ -7,7 +7,7 @@ from tqdm import tqdm
 import concurrent.futures  # 导入多线程库
 
 # 读取SPX期权数据
-file_path = '/Users/nan/Desktop/Final Project/cqf/spx_eod_202310.csv'
+file_path = 'spx_eod_2023/spx_eod_202310.csv'
 df = pd.read_csv(file_path)
 pd.set_option('display.max_columns', None)
 df.columns = df.columns.str.strip().str.replace("'", '', regex=False).str.replace('[', '', regex=False).str.replace(']', '', regex=False)
