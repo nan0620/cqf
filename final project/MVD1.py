@@ -6,44 +6,46 @@ import matplotlib.pyplot as plt
 from multiprocessing import Pool, cpu_count
 from tqdm.contrib.concurrent import process_map
 
-
 # Read SPX option data
-file_path = 'spx_eod_2023/spx_eod_202312.csv'
-df = pd.read_csv(file_path)
+file_path = '/Users/nanjiang/cqf/spx_eod_2021-2023_combined.csv'
+df = pd.read_csv(file_path, low_memory=False)
 df.columns = df.columns.str.strip().str.replace("'", '').str.replace('[', '').str.replace(']', '')
 
 # Set parameters
 params = {
-    'S0': df['UNDERLYING_LAST'].values,     # Initial underlying asset price
-    'K': df['STRIKE'].values,               # Option strike price
-    'T': df['DTE'].values / 252.0,          # Time expiry (in years, assuming 252 trading days in a year)
-    'r': 0.05,                              # Risk-free rate
-    'sigma_actual': df['C_IV'].values,      # Actual volatility
-    'mu': 0.05,                             # Expected rate of return, assumed to be equal to the risk-free rate
-    'num_paths': len(df),                   # options in the dataset
-    'num_steps': 252                        # time steps simulated
+    'S0': df['UNDERLYING_LAST'].values,  # Initial underlying asset price
+    'K': df['STRIKE'].values,  # Option strike price
+    'T': df['DTE'].values / 252.0,  # Time expiry (in years, assuming 252 trading days in a year)
+    'r': 0.05,  # Risk-free rate
+    'sigma_actual': df['C_IV'].values,  # Actual volatility
+    'mu': 0.05,  # Expected rate of return, assumed to be equal to the risk-free rate
+    'num_paths': len(df),  # options in the dataset
+    'num_steps': 252  # time steps simulated
 }
 
 # Pre-calculate constants
 dt = params['T'] / params['num_steps']
 sobol_seq = i4_sobol_generate(1, params['num_paths'] * params['num_steps']).reshape(params['num_paths'], params['num_steps'])
 
+
 def simulate_wrapper(path_id):
     return simulate_path(path_id, params, sobol_seq)
+
 
 def simulate_path(path_id, params, sobol_seq):
     # Initialize arrays
     S = np.zeros(params['num_steps'] + 1)
     S[0] = params['S0'][path_id]
-    
+
     # Simulate the path
     for j in range(1, params['num_steps'] + 1):
         Z = stats.norm.ppf(sobol_seq[path_id, j - 1])
-        S[j] = S[j - 1] + (params['r'] * S[j - 1] * dt[path_id] + params['sigma_actual'][path_id] * S[j - 1] * np.sqrt(dt[path_id]) * Z + 0.5 * params['sigma_actual'][path_id] ** 2 * S[j - 1] * (Z ** 2 - 1) * dt[path_id])
-    
+        S[j] = S[j - 1] + (params['r'] * S[j - 1] * dt[path_id] + params['sigma_actual'][path_id] * S[j - 1] * np.sqrt(dt[path_id]) * Z + 0.5 * params['sigma_actual'][path_id] ** 2 * S[j - 1] * (
+                    Z ** 2 - 1) * dt[path_id])
+
     # Ensure that S does not contain zero or negative values
     S = np.maximum(S, 1e-10)
-    
+
     # Calculate option prices and hedging
     C = np.maximum(S - params['K'][path_id], 0)
 
@@ -52,8 +54,8 @@ def simulate_path(path_id, params, sobol_seq):
 
     # Real volatility hedging
     d1_actual = (np.log(S / params['K'][path_id]) + (params['r'] + 0.5 * params['sigma_actual'][path_id] ** 2) * time_to_maturity) / (params['sigma_actual'][path_id] * np.sqrt(time_to_maturity))
-    delta_actual = stats.norm.cdf(d1_actual)    # Black-Scholes Delta
-    
+    delta_actual = stats.norm.cdf(d1_actual)  # Black-Scholes Delta
+
     # Calculate P&L
     # Initial portfolio: -C indicates purchase of options
     portfolio_actual = -C[0]
@@ -66,10 +68,11 @@ def simulate_path(path_id, params, sobol_seq):
     # Final portfolio value plus option value at expiry
     PnL_actual = portfolio_actual + C[-1]
     PnL_iv = portfolio_iv + C[-1]
-    
+
     return PnL_actual, PnL_iv
 
-if __name__ =='__main__':
+
+if __name__ == '__main__':
     print(cpu_count())
     num_processes = cpu_count()
     tasks = range(params['num_paths'])
