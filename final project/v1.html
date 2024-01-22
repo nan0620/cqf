@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="file:////Users/nan/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.11/crossnote/dependencies/katex/katex.min.css">
+      <link rel="stylesheet" href="file:////Users/nanjiang/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.11/crossnote/dependencies/katex/katex.min.css">
       
       
       
@@ -24,7 +24,9 @@
     
       <div class="crossnote markdown-preview  ">
       
-<div class="code-chunk" data-id="code-chunk-id-0" data-cmd="toc"><div class="input-div"><div class="code-chunk-btn-group"><div class="run-btn btn btn-xs btn-primary"><span>▶︎</span></div><div class="run-all-btn btn btn-xs btn-primary">all</div></div><div class="status">running...</div></div><div class="output-div"></div></div><ul>
+<h1 id="centeroptimal-hedging-with-advanced-delta-modelling"><center><strong>Optimal Hedging with Advanced Delta Modelling</strong> </center></h1>
+<ul>
+<li><a href="#optimal-hedging-with-advanced-delta-modelling"><strong>Optimal Hedging with Advanced Delta Modelling</strong></a></li>
 <li><a href="#part-i-volatility-arb-with-improved-gbm-and-monte-carlo">Part I: Volatility Arb with improved GBM and Monte-Carlo</a>
 <ul>
 <li><a href="#sub-part-1-consider-improvements-to-gbm-asset-evolution-using-milstein-schemes">Sub-part 1: Consider improvements to GBM asset evolution (using Milstein schemes)</a>
@@ -38,7 +40,7 @@
 <li><a href="#2-for-brownian-bridge">2. For Brownian Bridge</a></li>
 </ul>
 </li>
-<li><a href="#sub-part-2-under-the-condition-of-known--v_a--v_i--analytically-and-with-monte-carlo-confirm-the-items-below">Sub-part 2: Under the condition of known <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mi>a</mi></msub><mo>&gt;</mo><msub><mi>V</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">V_a &gt; V_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, analytically and with Monte-Carlo confirm the items below</a>
+<li><a href="#sub-part-2-under-the-condition-of-known--v_a--v_i--analytically-and-with-monte-carlo-confirm-the-items-below">Sub-part 2: Under the condition of known <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi mathvariant="normal">_</mi><mi>a</mi><mtext> </mtext><mi>V</mi><mi mathvariant="normal">_</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">V\_a \&gt; V\_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9933em;vertical-align:-0.31em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord mathnormal">i</span></span></span></span>, analytically and with Monte-Carlo confirm the items below</a>
 <ul>
 <li><a href="#1-actual-volatility-hedging">1. Actual Volatility Hedging</a>
 <ul>
@@ -72,27 +74,26 @@
 <li><a href="#4-monte-carlo-simulation">4. Monte Carlo simulation</a></li>
 </ul>
 </li>
-<li><a href="#sub-part-3-%E5%85%B6%E5%AE%83%E5%88%86%E6%9E%90">Sub-part 3: 其它分析</a>
+<li><a href="#sub-part-3-other-analysis">Sub-part 3: Other Analysis</a>
 <ul>
 <li><a href="#1-gamma-%CE%B3t">1. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Gamma (Γt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span><span class="mopen">(</span><span class="mord">Γ</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></a>
 <ul>
-<li><a href="#1-%E5%AF%B9pl%E7%9A%84%E5%BD%B1%E5%93%8D">(1) 对P&amp;L的影响</a></li>
-<li><a href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">(2) 代码实现</a></li>
-<li><a href="#3-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90">(3) 输出结果分析</a></li>
+<li><a href="#1-impact-on-pl">(1) Impact on P&amp;L</a></li>
+<li><a href="#2-code-implementation">(2) Code Implementation</a></li>
+<li><a href="#3-output-analysis">(3) Output Analysis</a></li>
 </ul>
 </li>
-<li><a href="#2--r2---sigma_imp-delta-t-%E9%A1%B9">2. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>−</mo><msub><mi>σ</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow></msub><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">r^2 - \sigma_{imp} \delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">im</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span>项</a>
+<li><a href="#2-the--r2---sigma_imp-delta-t--term">2. The <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>−</mo><mspace linebreak="newline"></mspace><mi>s</mi><mi>i</mi><mi>g</mi><mi>m</mi><mi>a</mi><mi mathvariant="normal">_</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow><mspace linebreak="newline"></mspace><mi>d</mi><mi>e</mi><mi>l</mi><mi>t</mi><mi>a</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">r^2 - \\sigma\_{imp} \\delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.9695em;vertical-align:-0.31em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">ma</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathnormal">im</span><span class="mord mathnormal">p</span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal">lt</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span></span></span></span> Term</a>
 <ul>
-<li><a href="#1-%E5%AF%B9pl%E7%9A%84%E5%BD%B1%E5%93%8D-1">(1) 对P&amp;L的影响</a></li>
-<li><a href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1">(2) 代码实现</a></li>
-<li><a href="#3-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-1">(3) 输出结果分析</a></li>
+<li><a href="#1-impact-on-pl-1">(1) Impact on P&amp;L</a></li>
+<li><a href="#2-code-implementation-1">(2) Code Implementation</a></li>
 </ul>
 </li>
-<li><a href="#3-%E4%BD%BF%E7%94%A8%E8%BE%83%E5%B0%8Fdelta%E5%AF%B9%E5%86%B2%E7%9A%84%E5%90%AB%E4%B9%89">3. 使用较小Delta对冲的含义</a>
+<li><a href="#3-implications-of-using-small-delta-hedging">3. Implications of Using Small Delta Hedging</a>
 <ul>
-<li><a href="#1-%E5%AF%B9pl%E7%9A%84%E5%BD%B1%E5%93%8D-2">(1) 对P&amp;L的影响</a></li>
-<li><a href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-2">(2) 代码实现</a></li>
-<li><a href="#3-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90-2">(3) 输出结果分析</a></li>
+<li><a href="#1-impact-on-pl-2">(1) Impact on P&amp;L</a></li>
+<li><a href="#2-code-implementation-2">(2) Code Implementation</a></li>
+<li><a href="#3-analysis-of-results">(3) Analysis of Results</a></li>
 </ul>
 </li>
 </ul>
@@ -101,16 +102,14 @@
 </li>
 <li><a href="#part-ii-minimum-variance-delta">Part II: Minimum Variance Delta</a>
 <ul>
-<li><a href="#1-begin-with-sorting-my-iv-data">1. Begin with sorting my IV data</a></li>
-<li><a href="#2-compute-your-dependent-variable-and-run-the-fitting-on-%CE%B4bs%CE%B42bs">2. Compute your dependent variable and run the fitting on δBS,δ2BS</a></li>
-<li><a href="#1-%E9%A6%96%E5%85%88%E5%AF%B9%E9%9A%90%E5%90%AB%E6%B3%A2%E5%8A%A8%E7%8E%87%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F---%E6%88%96%E8%80%85%E6%AF%8F%E4%B8%AA%E4%BA%A4%E6%98%93%E6%97%A5%E6%82%A8%E5%B0%86%E9%9C%80%E8%A6%81bs%E6%9C%9F%E6%9D%83%E4%BB%B7%E6%A0%BC%E4%BD%9C%E4%B8%BA%E9%9A%90%E5%90%AB%E6%B3%A2%E5%8A%A8%E7%8E%87%E7%99%BE%E5%88%86%E6%AF%94-%E5%B8%8C%E8%85%8A%E5%80%BC%CE%B4%E5%92%8Cvegavt-%CE%B4bs-%CE%BDbs%E6%9C%9F%E6%9D%83%E5%88%B0%E6%9C%9F%E7%BB%93%E6%9E%84%E4%B8%BA1m-3m-6m-9m-12m%E4%B8%8D%E9%9C%80%E8%A6%81%E6%AF%8F%E5%91%A8%E5%88%B0%E6%9C%9F%E5%9C%A8%E8%BF%99%E9%87%8C%E9%9C%80%E8%A6%81%E5%81%9A%E5%87%BA%E5%85%B3%E9%94%AE%E9%80%89%E6%8B%A9%E5%A6%82%E6%9E%9C%E6%82%A8%E8%A6%81%E7%A0%94%E7%A9%B6%E8%99%9A%E5%80%BC%E7%9C%8B%E6%B6%A8%E6%9C%9F%E6%9D%83%E7%9A%84delta%E9%99%A4%E4%BA%86%E7%BA%A6%E5%9C%A8atm%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84045--%CE%B4bs--055%E4%B9%8B%E5%A4%96---%E6%AF%8F%E4%B8%AA%E8%A1%8C%E6%9D%83%E4%BB%B7%E9%83%BD%E6%84%8F%E5%91%B3%E7%9D%80%E4%B8%BA%E6%AF%8F%E4%B8%AA%E5%88%B0%E6%9C%9F%E6%97%A5%E5%88%86%E5%88%AB%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAa-b-c%E7%9A%84%E5%8E%86%E5%8F%B2">1. 首先，对隐含波动率数据进行排序 - 或者每个交易日，您将需要BS期权价格作为隐含波动率百分比、希腊值δ和vega：(Vt, δBS, νBS)。期权到期结构为1M、3M、6M、9M、12M，不需要每周到期。在这里需要做出关键选择，如果您要研究虚值看涨期权的Delta，除了约在ATM范围内的0.45 &lt; δBS &lt; 0.55之外 - 每个行权价都意味着为每个到期日分别建立一个a、b、c的历史</a></li>
-<li><a href="#2-%E8%AE%A1%E7%AE%97%E4%BD%A0%E7%9A%84%E5%9B%A0%E5%8F%98%E9%87%8F%E5%B9%B6%E5%9C%A8%CE%B4bs%CE%B42bs%E4%B8%8A%E8%BF%9B%E8%A1%8C%E6%8B%9F%E5%90%88%E5%9F%BA%E4%BA%8E%E6%AF%8F%E6%97%A5%E6%9C%9F%E6%9D%83%E4%BB%B7%E6%A0%BC%E5%8F%98%E5%8A%A8vt%E7%9A%84%E4%BE%9D%E8%B5%96%E6%96%B9%E9%9D%A2%E4%BD%A0%E5%B0%86%E9%9C%80%E8%A6%81-st-st-%E4%BB%A5%E5%8F%8A%E4%B8%8A%E8%BF%B0%E6%8F%90%E5%88%B0%E7%9A%84%E5%B8%8C%E8%85%8A%E5%80%BC%E7%A1%AE%E5%88%87%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%97%E5%B0%86%E5%8F%96%E5%86%B3%E4%BA%8E%E4%BD%A0%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E5%9B%9E%E5%BD%92%E6%88%96%E8%BF%9B%E8%A1%8C-slsqp">2. 计算你的因变量并在δBS，δ2BS上进行拟合。基于每日期权价格变动∆Vt的依赖方面，你将需要 (∆St, St) 以及上述提到的希腊值。确切的数据列将取决于你如何组织回归或进行 SLSQP</a></li>
-<li><a href="#3-%E5%AF%B9%E4%BA%8E%E7%A0%94%E7%A9%B6%E9%A1%B9%E7%9B%AE%E5%8F%82%E6%95%B0a-b-c%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%B8%B8%E6%95%B0%E4%BD%86%E6%BB%9A%E5%8A%A8%E4%BC%B0%E8%AE%A1%E6%9C%AC%E8%BA%AB%E6%98%AF%E4%B8%80%E7%A7%8D%E6%A0%A1%E5%87%86%E6%8A%80%E6%9C%AF%E5%9B%A0%E4%B8%BA%E5%AF%B9%E4%BA%8E%E6%AF%8F%E4%B8%AA%E5%88%B0%E6%9C%9F%E6%97%A5%E4%BD%A0%E6%9C%89%E6%97%B6%E5%8F%98%E7%9A%84a-b-c%E4%B8%8D%E6%98%AF3%E4%B8%AA%E5%B8%B8%E6%95%B0hull-white%E7%9A%84%E5%BB%BA%E8%AE%AE%E6%98%AF%E4%BD%BF%E7%94%A83%E4%B8%AA%E6%9C%88%E7%9A%84%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%84%B6%E5%90%8E%E5%B0%86%E5%BC%80%E5%A7%8B%E6%97%A5%E6%9C%9F%E5%90%91%E5%90%8E%E7%A7%BB%E5%8A%A8%E4%B8%80%E5%A4%A93--22%E4%B8%AA%E8%A7%82%E6%B5%8B%E5%80%BC--%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E6%9B%B4%E7%9F%AD%E6%9B%B4%E9%95%BF%E7%9A%84%E5%91%A8%E6%9C%9F%E8%BF%9B%E8%A1%8C%E4%BC%B0%E8%AE%A1%E6%88%96%E8%80%85%E5%90%91%E5%90%8E%E7%A7%BB%E5%8A%A85-10%E5%A4%A9%E8%BF%98%E8%A6%81%E8%AE%B0%E4%BD%8F%E6%9C%9F%E6%9D%83%E7%9A%84%E9%9A%90%E5%90%AB%E6%B3%A2%E5%8A%A8%E7%8E%87%E5%8F%AF%E4%BB%A5%E4%BB%8E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E9%85%8D%E6%96%B9%E4%B8%AD%E6%A8%A1%E6%8B%9F%E5%87%BA%E6%9D%A5">3. 对于研究项目，参数a、b、c可以是常数，但滚动估计本身是一种校准技术，因为对于每个到期日，你有时变的a、b、c（不是3个常数）。Hull White的建议是使用3个月的滚动窗口，然后将开始日期向后移动一天（3 × 22个观测值）- 你可以使用更短/更长的周期进行估计，或者向后移动5-10天。还要记住，期权的隐含波动率可以从均匀分布的配方中模拟出来</a></li>
-<li><a href="#4-%E5%AF%B9%E4%BA%8E%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81%E6%9F%A5%E7%9C%8Ba-b-c%E9%9A%8F%E6%97%B6%E9%97%B4%E7%9A%84%E5%8F%98%E5%8C%96---%E6%88%91%E4%BB%AC%E4%BD%BF%E7%94%A8%E5%9B%9E%E5%BD%92%E4%BD%9C%E4%B8%BA%E6%8B%9F%E5%90%88%E5%B7%A5%E5%85%B7%E5%9B%A0%E6%AD%A4%E5%AE%83%E4%BB%AC%E7%94%9A%E8%87%B3%E5%8F%AF%E8%83%BD%E4%B8%8D%E5%85%B7%E6%9C%89%E7%BB%9F%E8%AE%A1%E6%98%BE%E8%91%97%E6%80%A7%E6%A3%80%E6%9F%A5%E5%A6%82%E6%9E%9C%CE%B4mv---%CE%B4bs%E7%BB%99%E5%87%BA%E4%B8%80%E4%B8%AA%E5%8F%8D%E5%90%91%E7%9A%84%E6%8A%9B%E7%89%A9%E7%BA%BF%E5%BD%A2%E7%8A%B6%E7%BB%98%E5%88%B6%E9%A2%84%E6%9C%9F%E9%9A%90%E5%90%AB%E6%B3%A2%E5%8A%A8%E7%8E%87%E5%8F%98%E5%8C%96%E4%B8%8Edelta%E7%9A%84%E5%85%B3%E7%B3%BB">4. 对于模型验证，查看a、b、c随时间的变化 - 我们使用回归作为拟合工具，因此它们甚至可能不具有统计显著性。检查如果δMV - δBS给出一个（反向的）抛物线形状，绘制预期隐含波动率变化与Delta的关系</a></li>
-<li><a href="#5-e%CF%83imp-%E9%A2%84%E8%AE%A1%E4%B8%BA%E8%B4%9F%E5%80%BC%E4%BD%86%E5%8F%AF%E8%83%BD%E4%B8%8D%E6%98%AF%E6%82%A8%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%AF%B9%E5%86%B2%E6%94%B6%E7%9B%8A%E6%98%AF%E5%90%A6%E6%8E%A5%E8%BF%9115%E5%B9%B6%E4%B8%94%E5%9C%A8%E5%93%AA%E4%BA%9Bdelta%E6%A1%B6%E5%92%8C%E5%88%B0%E6%9C%9F%E6%97%A5%E4%B8%AD">5. E[∆σimp] 预计为负值，但可能不是。您实现的对冲收益是否接近15%，并且在哪些Delta桶和到期日中？</a></li>
+<li><a href="#1-data-preprocessing">1. Data Preprocessing</a></li>
+<li><a href="#2-data-preprocessing">2. Data Preprocessing</a></li>
+<li><a href="#3-estimate-a-b-c-using-rolling-calculation">3. Estimate a, b, c using rolling calculation</a></li>
+<li><a href="#4-plot-and-verify">4. Plot and Verify</a></li>
 </ul>
 </li>
 </ul>
+<div style="page-break-after: always;"></div>
 <h1 id="part-i-volatility-arb-with-improved-gbm-and-monte-carlo">Part I: Volatility Arb with improved GBM and Monte-Carlo </h1>
 <h2 id="sub-part-1-consider-improvements-to-gbm-asset-evolution-using-milstein-schemes">Sub-part 1: Consider improvements to GBM asset evolution (using Milstein schemes) </h2>
 <p>Volatility Arb (Volatility Arbitrage): This refers to a strategy that exploits the difference between realized volatility in the market and the implied volatility of option prices. By hedging against changes in volatility, investors attempt to profit from variations between different options.</p>
@@ -419,7 +418,7 @@ M834 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist
 <p>The volatility skew describes the relationship between implied volatilities of options with different strike prices. Changes in the volatility skew can affect the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi mathvariant="normal">&amp;</mi><mi>L</mi></mrow><annotation encoding="application/x-tex">P\&amp;L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord">&amp;</span><span class="mord mathnormal">L</span></span></span></span> of hedging strategies involving options with different strike prices.</p>
 <hr>
 <h3 id="4-monte-carlo-simulation">4. Monte Carlo simulation </h3>
-<p>This code is for a Monte Carlo simulation using the Milstein scheme for stock price simulation. It computes the P&amp;L for both actual and implied volatility hedging strategies and then analyzes the results. The comments in the code explain the different steps of the process.</p>
+<p>This code is a demo for a Monte Carlo simulation using the Milstein scheme for stock price simulation. It computes the P&amp;L for both actual and implied volatility hedging strategies and then analyzes the results. The comments in the code explain the different steps of the process.</p>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
 <span class="token keyword keyword-import">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-as">as</span> stats
 <span class="token keyword keyword-from">from</span> sobol_seq <span class="token keyword keyword-import">import</span> i4_sobol_generate
@@ -515,42 +514,41 @@ The standard deviation of P&amp;L for implied volatility hedging. Compared to ac
 </ul>
 <hr>
 <div style="”page-break-after:" always;”=""></div>
-<h2 id="sub-part-3-其它分析">Sub-part 3: 其它分析 </h2>
+<h2 id="sub-part-3-other-analysis">Sub-part 3: Other Analysis </h2>
 <h3 id="1-gamma-γt">1. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Gamma (Γt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span><span class="mopen">(</span><span class="mord">Γ</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span> </h3>
-<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Gamma (Γt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span><span class="mopen">(</span><span class="mord">Γ</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span> 衡量期权Delta相对于标的资产价格变动的变化率。时间依赖的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi><mo stretchy="false">(</mo><mi mathvariant="normal">Γ</mi><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Gamma (Γt)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">amma</span><span class="mopen">(</span><span class="mord">Γ</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>考虑了这种敏感度随着期权临近到期如何变化。</p>
-<h4 id="1-对pl的影响">(1) 对P&amp;L的影响 </h4>
-<p>临近到期时较高的Gamma可能导致Delta发生显著变化，需要频繁调整对冲头寸。这可能会增加交易成本，从而影响P&amp;L。相反，较低的Gamma意味着对标的价格变化的敏感度较低，可能导致对冲头寸更稳定但可能反应不够灵敏。</p>
-<h4 id="2-代码实现">(2) 代码实现 </h4>
+<p>"Gamma (Γt)" measures the rate of change of option Delta relative to changes in the underlying asset's price. Time-dependent Gamma (Γt) takes into account how this sensitivity changes as the option approaches expiration.</p>
+<h4 id="1-impact-on-pl">(1) Impact on P&amp;L </h4>
+<p>A higher Gamma near expiration can lead to significant changes in Delta, requiring frequent adjustments to the hedging position. This can increase trading costs, affecting P&amp;L. Conversely, lower Gamma implies lower sensitivity to changes in the underlying price, which can result in a more stable hedging position but potentially less responsiveness.</p>
+<h4 id="2-code-implementation">(2) Code Implementation </h4>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
 <span class="token keyword keyword-import">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-as">as</span> stats
 <span class="token keyword keyword-from">from</span> sobol_seq <span class="token keyword keyword-import">import</span> i4_sobol_generate
 
-<span class="token comment"># 参数设置</span>
-S0 <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># 初始股价</span>
-K <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># 行权价</span>
-T <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment"># 到期时间</span>
-r <span class="token operator">=</span> <span class="token number">0.05</span>  <span class="token comment"># 无风险利率</span>
-sigma_actual <span class="token operator">=</span> <span class="token number">0.3</span>  <span class="token comment"># 实际波动率</span>
-mu <span class="token operator">=</span> r  <span class="token comment"># 预期收益率</span>
-num_paths <span class="token operator">=</span> <span class="token number">1000</span>  <span class="token comment"># 路径数量</span>
-num_steps <span class="token operator">=</span> <span class="token number">252</span>  <span class="token comment"># 时间步数量</span>
+S0 <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># Initial stock price</span>
+K <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># Strike price</span>
+T <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment"># Maturity time</span>
+r <span class="token operator">=</span> <span class="token number">0.05</span>  <span class="token comment"># Risk-free interest rate</span>
+sigma_actual <span class="token operator">=</span> <span class="token number">0.3</span>  <span class="token comment"># Actual volatility</span>
+mu <span class="token operator">=</span> r  <span class="token comment"># Expected return</span>
+num_paths <span class="token operator">=</span> <span class="token number">1000</span>  <span class="token comment"># Number of paths</span>
+num_steps <span class="token operator">=</span> <span class="token number">252</span>  <span class="token comment"># Number of time steps</span>
 
-<span class="token comment"># 蒙特卡洛模拟</span>
+<span class="token comment"># Monte Carlo Simulation</span>
 PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_paths<span class="token punctuation">)</span>
-Gamma_t_values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  <span class="token comment"># 用于存储各个路径上的Gamma值</span>
+Gamma_t_values <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>  <span class="token comment"># Used to store Gamma values for each path</span>
 
 dt <span class="token operator">=</span> T <span class="token operator">/</span> num_steps
 
-<span class="token comment"># 生成Sobol序列</span>
+<span class="token comment"># Generate Sobol sequence</span>
 sobol_seq <span class="token operator">=</span> i4_sobol_generate<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_paths <span class="token operator">*</span> num_steps<span class="token punctuation">)</span>
 sobol_seq <span class="token operator">=</span> sobol_seq<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>num_paths<span class="token punctuation">,</span> num_steps<span class="token punctuation">)</span>
 
 <span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_paths<span class="token punctuation">)</span><span class="token punctuation">:</span>
     S <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
     S<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> S0
-    gamma_path <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_steps<span class="token punctuation">)</span>  <span class="token comment"># 存储每个时间步的Gamma值</span>
+    gamma_path <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_steps<span class="token punctuation">)</span>  <span class="token comment"># Store Gamma values at each time step</span>
 
-    <span class="token comment"># 生成路径</span>
+    <span class="token comment"># Generate path</span>
     <span class="token keyword keyword-for">for</span> j <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         Z <span class="token operator">=</span> stats<span class="token punctuation">.</span>norm<span class="token punctuation">.</span>ppf<span class="token punctuation">(</span>sobol_seq<span class="token punctuation">[</span>i<span class="token punctuation">,</span> j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         S<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> S<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> r <span class="token operator">*</span> S<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> dt <span class="token operator">+</span> sigma_actual <span class="token operator">*</span> S<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>dt<span class="token punctuation">)</span> <span class="token operator">*</span> Z \
@@ -558,7 +556,7 @@ sobol_seq <span class="token operator">=</span> sobol_seq<span class="token punc
 
     S <span class="token operator">=</span> np<span class="token punctuation">.</span>maximum<span class="token punctuation">(</span>S<span class="token punctuation">,</span> <span class="token number">1e-10</span><span class="token punctuation">)</span>
 
-    <span class="token comment"># 计算期权价格和Delta、Gamma对冲</span>
+    <span class="token comment"># Calculate option prices and Delta, Gamma hedging</span>
     d1 <span class="token operator">=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>S <span class="token operator">/</span> K<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>r <span class="token operator">+</span> <span class="token number">0.5</span> <span class="token operator">*</span> sigma_actual <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>
             sigma_actual <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span><span class="token punctuation">)</span>
     d2 <span class="token operator">=</span> d1 <span class="token operator">-</span> sigma_actual <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span>
@@ -566,23 +564,23 @@ sobol_seq <span class="token operator">=</span> sobol_seq<span class="token punc
     delta <span class="token operator">=</span> stats<span class="token punctuation">.</span>norm<span class="token punctuation">.</span>cdf<span class="token punctuation">(</span>d1<span class="token punctuation">)</span>
     gamma <span class="token operator">=</span> stats<span class="token punctuation">.</span>norm<span class="token punctuation">.</span>pdf<span class="token punctuation">(</span>d1<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>S <span class="token operator">*</span> sigma_actual <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    <span class="token comment"># 计算P&amp;L和记录Gamma</span>
-    portfolio <span class="token operator">=</span> <span class="token operator">-</span>C<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># 初始投资组合：-C表示购买期权</span>
+    <span class="token comment"># Calculate P&amp;L and record Gamma</span>
+    portfolio <span class="token operator">=</span> <span class="token operator">-</span>C<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>  <span class="token comment"># Initial portfolio: -C represents buying the option</span>
     <span class="token keyword keyword-for">for</span> j <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_steps<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        portfolio <span class="token operator">+=</span> delta<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> S<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># Delta对冲</span>
+        portfolio <span class="token operator">+=</span> delta<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> S<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># Delta hedging</span>
         gamma_path<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> gamma<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
-    PnL<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> portfolio <span class="token operator">+</span> C<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment"># 最终组合价值加上期权到期价值</span>
+    PnL<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> portfolio <span class="token operator">+</span> C<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>  <span class="token comment"># Final portfolio value plus option's maturity value</span>
     Gamma_t_values<span class="token punctuation">.</span>append<span class="token punctuation">(</span>gamma_path<span class="token punctuation">)</span>
 
-<span class="token comment"># 分析结果</span>
+<span class="token comment"># Analyze results</span>
 mean_PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>PnL<span class="token punctuation">)</span>
 std_PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>PnL<span class="token punctuation">)</span>
-mean_Gamma_t <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>Gamma_t_values<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 计算每个时间步的平均Gamma值</span>
+mean_Gamma_t <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>Gamma_t_values<span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># Calculate the mean Gamma at each time step</span>
 
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Mean P&amp;L: </span><span class="token interpolation"><span class="token punctuation">{</span>mean_PnL<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Standard deviation of P&amp;L: </span><span class="token interpolation"><span class="token punctuation">{</span>std_PnL<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
-<span class="token comment"># 绘图展示Gamma随时间的变化</span>
+<span class="token comment"># Plot the change in Gamma over time</span>
 <span class="token keyword keyword-import">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword keyword-as">as</span> plt
 plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>mean_Gamma_t<span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Time Steps'</span><span class="token punctuation">)</span>
@@ -590,7 +588,7 @@ plt<span class="token punctuation">.</span>ylabel<span class="token punctuation"
 plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Mean Gamma Over Time'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-</code></pre><h4 id="3-输出结果分析">(3) 输出结果分析 </h4>
+</code></pre><h4 id="3-output-analysis">(3) Output Analysis </h4>
 <ul>
 <li>
 <p><strong>Mean P&amp;L</strong>: -20.456716417970334</p>
@@ -600,50 +598,49 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 </li>
 <li>
 <p><strong>figure</strong>:<br>
-<img src="gamma.png" alt="示例图片" width="300px"></p>
-<p>图表显示，Mean Gamma随时间步的增加而上升，并在接近期权到期时显著增加。这是一个符合期权定价理论的预期结果。具体地：</p>
+<img src="gamma.png" width="300px"><br>
+The chart shows that the Mean Gamma increases with the progression of time steps and significantly spikes as the option approaches its expiration. This is an expected result in line with options pricing theory. Specifically:</p>
 <ul>
 <li>
-<p><strong>Gamma值的增长</strong>：在期权的有效期内，Gamma值通常在期权临近到期时变得更大。这是因为，随着到期日的临近，标的资产的微小价格变动对期权内在价值的影响增大，Delta变化加快，从而Gamma值上升。</p>
+<p><strong>Growth in Gamma Values:</strong> Within the effective life of the option, gamma values typically increase as the option approaches its expiration. This is because, as the expiration date approaches, even small price changes in the underlying asset have a more significant impact on the option's intrinsic value, leading to an accelerated change in delta and, consequently, an increase in gamma.</p>
 </li>
 <li>
-<p><strong>期权到期前的尖峰</strong>：从图中可以看出，Gamma值在时间序列的最后部分出现尖峰，这表明期权在到期前的最后几个时间步内变得非常敏感，即使是很小的标的资产价格变动也会导致Delta的显著变化。</p>
+<p><strong>Gamma Peaks Before Option Expiry:</strong> As observed in the chart, gamma values exhibit peaks in the final part of the time series. This indicates that the option becomes highly sensitive in the last few time steps before expiration, where even minor price changes in the underlying asset can lead to significant delta changes.</p>
 </li>
 <li>
-<p><strong>对冲策略的影响</strong>：高Gamma值意味着对冲者需要更频繁地调整其对冲头寸，尤其是在期权到期前。这可能导致交易成本的上升，并可能引起P&amp;L的波动。</p>
+<p><strong>Impact on Hedging Strategy:</strong> High gamma values imply that hedgers need to adjust their hedge positions more frequently, especially as the option approaches expiration. This can result in increased trading costs and may lead to fluctuations in the Profit and Loss (P&amp;L).</p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="2--r2---sigma_imp-delta-t-项">2. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>−</mo><msub><mi>σ</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow></msub><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">r^2 - \sigma_{imp} \delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">im</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span>项 </h3>
-<p>这个项结合了无风险利率的平方(r2)，隐含波动率(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sigma_{imp}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">im</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>)和一个小时间间隔(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span>)。</p>
-<h4 id="1-对pl的影响-1">(1) 对P&amp;L的影响 </h4>
-<p>无风险利率影响持有头寸的成本，而隐含波动率影响期权的时间价值。这些因素与时间的推移(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span>)的相互作用可能对P&amp;L产生复杂的影响。</p>
-<h4 id="2-代码实现-1">(2) 代码实现 </h4>
+<h3 id="2-the--r2---sigma_imp-delta-t--term">2. The <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup><mo>−</mo><msub><mi>σ</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow></msub><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">r^2 - \sigma_{imp} \delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.9805em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">im</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span> Term </h3>
+<p>This term combines the square of the risk-free interest rate (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>r</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">r^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>), implied volatility (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mrow><mi>i</mi><mi>m</mi><mi>p</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sigma_{imp}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7167em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">im</span><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span></span></span></span>), and a small time interval (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span>).</p>
+<h4 id="1-impact-on-pl-1">(1) Impact on P&amp;L </h4>
+<p>The risk-free interest rate affects the cost of holding positions, while implied volatility impacts the option's time value. The interaction of these factors with the small time interval <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\delta t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord mathnormal">t</span></span></span></span> can have complex effects on the P&amp;L. The precise impact depends on the specific values of these factors, their changes over time, and how they interact within the portfolio's dynamics.</p>
+<h4 id="2-code-implementation-1">(2) Code Implementation </h4>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
 <span class="token keyword keyword-import">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-as">as</span> stats
 <span class="token keyword keyword-from">from</span> matplotlib <span class="token keyword keyword-import">import</span> pyplot <span class="token keyword keyword-as">as</span> plt
 <span class="token keyword keyword-from">from</span> sobol_seq <span class="token keyword keyword-import">import</span> i4_sobol_generate
 
 <span class="token comment"># 参数设置</span>
-S0 <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># 初始股价</span>
-K <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># 行权价</span>
-T <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment"># 到期时间</span>
-r <span class="token operator">=</span> <span class="token number">0.05</span>  <span class="token comment"># 无风险利率</span>
-sigma_actual <span class="token operator">=</span> <span class="token number">0.3</span>  <span class="token comment"># 实际波动率</span>
-sigma_imp <span class="token operator">=</span> <span class="token number">0.2</span>    <span class="token comment"># 隐含波动率</span>
-mu <span class="token operator">=</span> r             <span class="token comment"># 预期收益率</span>
-num_paths <span class="token operator">=</span> <span class="token number">1000</span>   <span class="token comment"># 路径数量</span>
-num_steps <span class="token operator">=</span> <span class="token number">252</span>    <span class="token comment"># 时间步数量</span>
-dt <span class="token operator">=</span> T <span class="token operator">/</span> num_steps <span class="token comment"># 时间步长度</span>
+S0 <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># Initial stock price</span>
+K <span class="token operator">=</span> <span class="token number">100</span>  <span class="token comment"># Strike price</span>
+T <span class="token operator">=</span> <span class="token number">1.0</span>  <span class="token comment"># Time to maturity</span>
+r <span class="token operator">=</span> <span class="token number">0.05</span>  <span class="token comment"># Risk-free interest rate</span>
+sigma_actual <span class="token operator">=</span> <span class="token number">0.3</span>  <span class="token comment"># Actual volatility</span>
+sigma_imp <span class="token operator">=</span> <span class="token number">0.2</span>    <span class="token comment"># Implied volatility</span>
+mu <span class="token operator">=</span> r             <span class="token comment"># Expected return rate</span>
+num_paths <span class="token operator">=</span> <span class="token number">1000</span>   <span class="token comment"># Number of paths</span>
+num_steps <span class="token operator">=</span> <span class="token number">252</span>    <span class="token comment"># Number of time steps</span>
+dt <span class="token operator">=</span> T <span class="token operator">/</span> num_steps <span class="token comment"># Time step length</span>
 
-<span class="token comment"># 生成Sobol序列</span>
+<span class="token comment"># Generating Sobol sequence</span>
 sobol_seq <span class="token operator">=</span> i4_sobol_generate<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_paths <span class="token operator">*</span> num_steps<span class="token punctuation">)</span><span class="token punctuation">.</span>flatten<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-<span class="token comment"># 蒙特卡洛模拟</span>
+<span class="token comment"># Monte Carlo simulation</span>
 PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_paths<span class="token punctuation">)</span>
 time_steps <span class="token operator">=</span> np<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> T<span class="token punctuation">,</span> num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
-
 
 <span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>num_paths<span class="token punctuation">)</span><span class="token punctuation">:</span>
     S <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
@@ -651,42 +648,42 @@ time_steps <span class="token operator">=</span> np<span class="token punctuatio
     r_squared_term <span class="token operator">=</span> r<span class="token operator">**</span><span class="token number">2</span> <span class="token operator">*</span> dt
     sigma_imp_term <span class="token operator">=</span> sigma_imp <span class="token operator">*</span> dt
 
-    <span class="token comment"># 生成路径</span>
+    <span class="token comment"># Generating the path</span>
     <span class="token keyword keyword-for">for</span> j <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> num_steps <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         Z <span class="token operator">=</span> stats<span class="token punctuation">.</span>norm<span class="token punctuation">.</span>ppf<span class="token punctuation">(</span>sobol_seq<span class="token punctuation">[</span>i <span class="token operator">*</span> num_steps <span class="token operator">+</span> j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         S<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> S<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">+</span> mu <span class="token operator">*</span> dt <span class="token operator">+</span> sigma_actual <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>dt<span class="token punctuation">)</span> <span class="token operator">*</span> Z<span class="token punctuation">)</span>
 
-    <span class="token comment"># 计算期权Delta对冲</span>
+    <span class="token comment"># Calculating option Delta hedging</span>
     d1 <span class="token operator">=</span> <span class="token punctuation">(</span>np<span class="token punctuation">.</span>log<span class="token punctuation">(</span>S<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/</span> K<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>r <span class="token operator">+</span> <span class="token number">0.5</span> <span class="token operator">*</span> sigma_imp<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps<span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>sigma_imp <span class="token operator">*</span> np<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span>T <span class="token operator">-</span> np<span class="token punctuation">.</span>arange<span class="token punctuation">(</span>num_steps<span class="token punctuation">)</span> <span class="token operator">*</span> dt<span class="token punctuation">)</span><span class="token punctuation">)</span>
     delta <span class="token operator">=</span> stats<span class="token punctuation">.</span>norm<span class="token punctuation">.</span>cdf<span class="token punctuation">(</span>d1<span class="token punctuation">)</span>
 
-    <span class="token comment"># 计算对冲成本</span>
+    <span class="token comment"># Calculating the cost of hedging</span>
     cost_of_hedging <span class="token operator">=</span> np<span class="token punctuation">.</span>cumsum<span class="token punctuation">(</span>delta <span class="token operator">*</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">-</span> S<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-    <span class="token comment"># 计算P&amp;L</span>
+    <span class="token comment"># Calculating P&amp;L</span>
     final_option_value <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>S<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> K<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
     PnL<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> final_option_value <span class="token operator">-</span> cost_of_hedging<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token punctuation">(</span>r_squared_term <span class="token operator">-</span> sigma_imp_term<span class="token punctuation">)</span>
 
-<span class="token comment"># 分析结果</span>
+<span class="token comment"># Analyzing the results</span>
 mean_PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>mean<span class="token punctuation">(</span>PnL<span class="token punctuation">)</span>
 std_PnL <span class="token operator">=</span> np<span class="token punctuation">.</span>std<span class="token punctuation">(</span>PnL<span class="token punctuation">)</span>
 
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Mean P&amp;L: </span><span class="token interpolation"><span class="token punctuation">{</span>mean_PnL<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Standard deviation of P&amp;L: </span><span class="token interpolation"><span class="token punctuation">{</span>std_PnL<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
-<span class="token comment"># 输出图像展示</span>
+<span class="token comment"># Output for visual representation</span>
 plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-<span class="token comment"># P&amp;L的直方图</span>
+<span class="token comment"># Histogram of P&amp;L</span>
 plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>PnL<span class="token punctuation">,</span> bins<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'blue'</span><span class="token punctuation">,</span> edgecolor<span class="token operator">=</span><span class="token string">'black'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Histogram of P&amp;L'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'P&amp;L'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Frequency'</span><span class="token punctuation">)</span>
 
-<span class="token comment"># P&amp;L随时间变化的路径</span>
+<span class="token comment"># P&amp;L paths over time</span>
 plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
-<span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">min</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> num_paths<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># 只绘制部分路径</span>
+<span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">min</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> num_paths<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># Only plotting a subset of paths</span>
     plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>time_steps<span class="token punctuation">,</span> np<span class="token punctuation">.</span>cumsum<span class="token punctuation">(</span>np<span class="token punctuation">.</span>insert<span class="token punctuation">(</span>delta <span class="token operator">*</span> <span class="token punctuation">(</span>S<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">-</span> S<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string-interpolation"><span class="token string">f'Path </span><span class="token interpolation"><span class="token punctuation">{</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'P&amp;L Paths Over Time'</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Time (Years)'</span><span class="token punctuation">)</span>
@@ -695,45 +692,36 @@ plt<span class="token punctuation">.</span>legend<span class="token punctuation"
 
 plt<span class="token punctuation">.</span>tight_layout<span class="token punctuation">(</span><span class="token punctuation">)</span>
 plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
-</code></pre><h4 id="3-输出结果分析-1">(3) 输出结果分析 </h4>
+</code></pre><p>(3) 输出结果分析:</p>
 <ul>
 <li>
 <p><strong>Mean P&amp;L</strong>: 14.489793353691867<br>
-这表示在您的蒙特卡洛模拟中，对冲策略平均盈利约为14.49单位货币。<br>
-这是一个正值，意味着在模拟期间，平均而言，对冲策略是盈利的。</p>
+This indicates that in your Monte Carlo simulation, the average profit of the hedging strategy is approximately 14.49 currency units. This is a positive value, indicating that on average, the hedging strategy is profitable during the simulation.</p>
 </li>
 <li>
 <p><strong>Standard deviation of P&amp;L</strong>: 1.6896365372497164<br>
-这个值表示在不同模拟路径上P&amp;L的波动性或分散程度。<br>
-标准差较小，意味着大多数路径上的盈亏相对于平均值而言没有很大的波动；换句话说，对冲策略的结果比较稳定。<br>
-低标准差通常被视为风险较低，因为P&amp;L的波动较小，预测未来绩效的不确定性较低。</p>
+This value represents the volatility or dispersion of P&amp;L across different simulation paths. A lower standard deviation implies that there is relatively little variation in profit and loss among most paths compared to the mean, suggesting that the results of the hedging strategy are relatively stable. A low standard deviation is often seen as lower risk because P&amp;L fluctuations are smaller, indicating less uncertainty in predicting future performance.</p>
 </li>
 <li>
-<p><strong>figure</strong><br>
-<img src="特别项.png" alt="示例图片" width="300px"></p>
+<p><strong>Figure</strong><br>
+<img src="%E7%89%B9%E5%88%AB%E9%A1%B9.png" alt="Histogram of P&amp;L"></p>
 <ul>
 <li>
-<p><strong>直方图（Histogram of P&amp;L）</strong><br>
-这个直方图显示了P&amp;L（盈亏）的分布情况。<br>
-大多数的P&amp;L值集中在一个范围内，这表明大部分的对冲路径产生了相似大小的P&amp;L。<br>
-P&amp;L分布看起来是单峰的，这意味着大多数对冲结果都围绕着某个中心值波动。<br>
-如果直方图显示的P&amp;L值主要集中在正值，那么表明对冲策略通常是盈利的；如果主要集中在负值，则表明对冲策略通常是亏损的。</p>
+<p><strong>Histogram of P&amp;L</strong><br>
+This histogram shows the distribution of P&amp;L (profit and loss). Most of the P&amp;L values are concentrated within a range, indicating that the majority of hedging paths generate P&amp;L of similar magnitudes. The P&amp;L distribution appears unimodal, meaning that most hedging outcomes revolve around a central value. If the histogram predominantly shows positive values, it indicates that the hedging strategy tends to be profitable, while predominantly negative values suggest losses.</p>
 </li>
 <li>
-<p><strong>P&amp;L路径图（P&amp;L Paths Over Time）</strong><br>
-这个图表显示了选取的十条路径的累计P&amp;L随时间的变化情况。<br>
-每条路径代表一个特定的股价路径和相应的对冲操作所导致的累计P&amp;L变化。<br>
-从图中可以看出，不同路径的P&amp;L随时间变化的趋势大致相似，但具体数值各不相同，表明市场条件和对冲操作的随机性对P&amp;L有显著影响。<br>
-如果路径在时间序列的后期出现较大跌幅，这可能表明期权接近到期时P&amp;L的不稳定性增加，或者表明在某些路径中发生了较大的市场价格波动，导致对冲策略的P&amp;L波动。</p>
+<p><strong>P&amp;L Paths Over Time</strong><br>
+This chart displays the cumulative P&amp;L over time for ten selected paths. Each path represents a specific stock price path and the corresponding cumulative P&amp;L changes resulting from hedging actions. The trend of P&amp;L over time is roughly similar for different paths, but the specific values vary, indicating the significant influence of market conditions and the randomness of hedging actions on P&amp;L. If paths experience significant declines in the later stages of the time series, it may suggest increased instability in P&amp;L as the option approaches maturity or significant market price fluctuations in some paths leading to P&amp;L volatility.</p>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="3-使用较小delta对冲的含义">3. 使用较小Delta对冲的含义 </h3>
-<p>根据第二部分MVD（最小方差Delta）建模，使用较小的delta（即使对冲误差的方差最小化的delta）对冲具有含义。</p>
-<h4 id="1-对pl的影响-2">(1) 对P&amp;L的影响 </h4>
-<p>使用较小的delta对冲旨在最小化对冲投资组合的方差，可能导致更稳定的P&amp;L概况。然而，它也可能意味着投资组合对标的资产价格的大幅度变动反应不够灵敏，这可能是有利的，也可能是不利的，取决于市场的走势。</p>
-<h4 id="2-代码实现-2">(2) 代码实现 </h4>
+<h3 id="3-implications-of-using-small-delta-hedging">3. Implications of Using Small Delta Hedging </h3>
+<p>Based on the modeling in the second part (Minimum Variance Delta - MVD), using a small delta (minimizing the variance of hedging errors) has implications.</p>
+<h4 id="1-impact-on-pl-2">(1) Impact on P&amp;L </h4>
+<p>Using a small delta for hedging aims to minimize the variance of the hedging portfolio, which may result in a more stable P&amp;L profile. However, it may also mean that the portfolio is less responsive to significant price movements in the underlying asset. This can be advantageous or disadvantageous depending on the market conditions.</p>
+<h4 id="2-code-implementation-2">(2) Code Implementation </h4>
 <pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
 <span class="token keyword keyword-import">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-as">as</span> stats
 <span class="token keyword keyword-import">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword keyword-as">as</span> plt
@@ -814,131 +802,550 @@ plt<span class="token punctuation">.</span>show<span class="token punctuation">(
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Mean P&amp;L for small delta hedging: </span><span class="token interpolation"><span class="token punctuation">{</span>mean_PnL_small_delta<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Standard deviation of P&amp;L for small delta hedging: </span><span class="token interpolation"><span class="token punctuation">{</span>std_PnL_small_delta<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
-</code></pre><h4 id="3-输出结果分析-2">(3) 输出结果分析 </h4>
+</code></pre><h4 id="3-analysis-of-results">(3) Analysis of Results </h4>
 <ul>
 <li>
 <p><strong>Mean P&amp;L for traditional volatility hedging</strong>: 11.578686616741932<br>
-这意味着对冲策略平均盈利约为11.58单位货币</p>
+This means that the average profit for the traditional volatility hedging strategy is approximately 11.58 currency units.</p>
 </li>
 <li>
 <p><strong>Standard deviation of P&amp;L for traditional volatility hedging</strong>: 0.6601932633974179<br>
-传统Delta对冲的标准差为0.6602，说明P&amp;L的波动范围相对较宽。</p>
+The standard deviation of P&amp;L for traditional Delta hedging is 0.6602, indicating a relatively wide range of fluctuations in P&amp;L.</p>
 </li>
 <li>
 <p><strong>Mean P&amp;L for small delta hedging</strong>: 10.689379414770666<br>
-小Delta对冲的平均P&amp;L为10.6894，略低于传统Delta对冲，但差距不大。</p>
+The average P&amp;L for small Delta hedging is 10.6894, slightly lower than traditional Delta hedging, but the difference is not significant.</p>
 </li>
 <li>
 <p><strong>Standard deviation of P&amp;L for small delta hedging</strong>: 0.5394603400279799<br>
-小Delta对冲的标准差为0.5395，较传统Delta对冲的波动性更小，表明使用小Delta对冲的稳定性更高。</p>
+The standard deviation of P&amp;L for small Delta hedging is 0.5395, which is lower than the volatility of traditional Delta hedging. This suggests that small Delta hedging is more stable.</p>
 </li>
 <li>
-<p><strong>figure</strong><br>
-<img src="小delta.png" alt="示例图片" width="300px"></p>
+<p><strong>Figure</strong><br>
+<img src="small delta.png" width="300px"></p>
 <ul>
 <li>
-<p><strong>直方图（Histogram of P&amp;L）</strong><br>
-直方图显示了两种对冲策略的P&amp;L分布情况。传统Delta对冲策略的P&amp;L分布（蓝色）显示出比较宽的分布，而小Delta对冲策略的P&amp;L分布（橙色）则相对狭窄。<br>
-这表明传统Delta对冲策略的盈亏波动性较大，而小Delta对冲策略则更为稳定，其P&amp;L的波动较小。</p>
+<p><strong>Histogram of P&amp;L</strong><br>
+The histogram shows the distribution of P&amp;L for both hedging strategies. The P&amp;L distribution for traditional Delta hedging (blue) exhibits a wider spread, while the P&amp;L distribution for small Delta hedging (orange) is relatively narrow.<br>
+This indicates that traditional Delta hedging has greater P&amp;L volatility, while small Delta hedging is more stable with smaller P&amp;L fluctuations.</p>
 </li>
 <li>
-<p><strong>P&amp;L路径图（P&amp;L Paths Over Time）</strong><br>
-该图表显示了传统和小Delta对冲策略的几条随机选取的路径。可以看到，虽然两种策略的路径在趋势上相似，但是传统Delta策略的波动性较高。<br>
-对于每条路径，小Delta策略的累计P&amp;L变化较为平滑，这意味着其对市场变动的反应性降低，但在大市波动时可能会减少潜在的亏损。</p>
+<p><strong>P&amp;L Paths Over Time</strong><br>
+This chart displays several randomly selected paths for both traditional and small Delta hedging strategies. It can be observed that although the paths of both strategies show similarities in trends, the traditional Delta strategy has higher volatility.<br>
+For each path, the cumulative P&amp;L changes for the small Delta strategy are smoother, suggesting reduced responsiveness to market fluctuations but potentially lower losses during significant market volatility.</p>
 </li>
 </ul>
 </li>
 </ul>
-<p><strong>综合上述分析，小Delta对冲策略在降低P&amp;L波动（提高稳定性）方面取得了一定的效果，但也牺牲了一些盈利潜力。这些发现验证了对冲策略中稳定性与响应性之间的权衡关系。</strong></p>
+<p><strong>In summary, the small Delta hedging strategy has achieved some level of effectiveness in reducing P&amp;L volatility (improving stability) but sacrifices some profit potential. These findings validate the trade-off relationship between stability and responsiveness in hedging strategies.</strong></p>
 <hr>
 <div style="”page-break-after:" always;”=""></div>
 <h1 id="part-ii-minimum-variance-delta">Part II: Minimum Variance Delta </h1>
-<p>Note: 我从 <a href="http://OptionsDX.com">OptionsDX.com</a> 上下载了近三年的S&amp;P500 index options data. 我将会选择看涨期权的数据进行以下研究。</p>
-<p>原始数据demo如下：</p>
+<p>Note: I have downloaded S&amp;P 500 index options data for the past three years from <a href="http://OptionsDX.com">OptionsDX.com</a>. I will be selecting the data for call options for the following research.</p>
+<p>Here is a demo of the raw data:</p>
 <table>
 <thead>
 <tr>
-<th>QUOTE_UNIXTIME</th>
-<th>QUOTE_READTIME</th>
-<th>QUOTE_DATE</th>
-<th>QUOTE_TIME_HOURS</th>
-<th>UNDERLYING_LAST</th>
-<th>EXPIRE_DATE</th>
-<th>EXPIRE_UNIX</th>
-<th>DTE</th>
-<th>C_DELTA</th>
-<th>C_GAMMA</th>
-<th>C_VEGA</th>
-<th>C_THETA</th>
-<th>C_RHO</th>
-<th>C_IV</th>
-<th>C_VOLUME</th>
-<th>C_LAST</th>
-<th>C_SIZE</th>
-<th>C_BID</th>
-<th>C_ASK</th>
-<th>STRIKE</th>
-<th>P_BID</th>
-<th>P_ASK</th>
-<th>P_SIZE</th>
-<th>P_LAST</th>
-<th>P_DELTA</th>
-<th>P_GAMMA</th>
-<th>P_VEGA</th>
-<th>P_THETA</th>
-<th>P_RHO</th>
-<th>P_IV</th>
-<th>P_VOLUME</th>
-<th>STRIKE_DISTANCE</th>
-<th>STRIKE_DISTANCE_PCT</th>
+<th>Parameter</th>
+<th>Value</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>QUOTE_UNIXTIME</td>
 <td>1696276800</td>
+<td>Unix timestamp for the time of the quote</td>
+</tr>
+<tr>
+<td>QUOTE_READTIME</td>
 <td>2023-10-02 16:00</td>
+<td>The specific time when the quote was read</td>
+</tr>
+<tr>
+<td>QUOTE_DATE</td>
 <td>2023-10-02</td>
+<td>The date of the quote</td>
+</tr>
+<tr>
+<td>QUOTE_TIME_HOURS</td>
 <td>16.000000</td>
+<td>The time of the quote in hours</td>
+</tr>
+<tr>
+<td>UNDERLYING_LAST</td>
 <td>4288.240000</td>
+<td>The last traded price of the underlying asset</td>
+</tr>
+<tr>
+<td>EXPIRE_DATE</td>
 <td>2023-10-02</td>
+<td>Expiration date of the option</td>
+</tr>
+<tr>
+<td>EXPIRE_UNIX</td>
 <td>1696276800</td>
+<td>Unix timestamp for the expiration date of the option</td>
+</tr>
+<tr>
+<td>DTE</td>
 <td>0.000000</td>
+<td>Days to expiration</td>
+</tr>
+<tr>
+<td>C_DELTA</td>
 <td>0.002610</td>
+<td>Delta value for the call option</td>
+</tr>
+<tr>
+<td>C_GAMMA</td>
 <td>0.000340</td>
+<td>Gamma value for the call option</td>
+</tr>
+<tr>
+<td>C_VEGA</td>
 <td>0.018000</td>
+<td>Vega value for the call option</td>
+</tr>
+<tr>
+<td>C_THETA</td>
 <td>-0.025280</td>
+<td>Theta value for the call option</td>
+</tr>
+<tr>
+<td>C_RHO</td>
 <td>0.000200</td>
+<td>Rho value for the call option</td>
+</tr>
+<tr>
+<td>C_IV</td>
 <td>0.143600</td>
+<td>Implied Volatility of the call option</td>
+</tr>
+<tr>
+<td>C_VOLUME</td>
 <td>1858.000000</td>
+<td>Trading volume of the call option</td>
+</tr>
+<tr>
+<td>C_LAST</td>
 <td>0.050</td>
+<td>Last traded price of the call option</td>
+</tr>
+<tr>
+<td>C_SIZE</td>
 <td>0 x 2077</td>
+<td>Market size of the call option</td>
+</tr>
+<tr>
+<td>C_BID</td>
 <td>0.000</td>
+<td>Bid price for the call option</td>
+</tr>
+<tr>
+<td>C_ASK</td>
 <td>0.050</td>
+<td>Ask price for the call option</td>
+</tr>
+<tr>
+<td>STRIKE</td>
 <td>4365.000000</td>
+<td>Strike price</td>
+</tr>
+<tr>
+<td>P_BID</td>
 <td>77.500</td>
+<td>Bid price for the put option</td>
+</tr>
+<tr>
+<td>P_ASK</td>
 <td>79.000</td>
+<td>Ask price for the put option</td>
+</tr>
+<tr>
+<td>P_SIZE</td>
 <td>1 x 8</td>
+<td>Market size of the put option</td>
+</tr>
+<tr>
+<td>P_LAST</td>
 <td>79.870</td>
+<td>Last traded price of the put option</td>
+</tr>
+<tr>
+<td>P_DELTA</td>
 <td>-0.920040</td>
+<td>Delta value for the put option</td>
+</tr>
+<tr>
+<td>P_GAMMA</td>
 <td>0.002600</td>
+<td>Gamma value for the put option</td>
+</tr>
+<tr>
+<td>P_VEGA</td>
 <td>0.281380</td>
+<td>Vega value for the put option</td>
+</tr>
+<tr>
+<td>P_THETA</td>
 <td>-1.489660</td>
+<td>Theta value for the put option</td>
+</tr>
+<tr>
+<td>P_RHO</td>
 <td>-0.048660</td>
+<td>Rho value for the put option</td>
+</tr>
+<tr>
+<td>P_IV</td>
 <td>0.279100</td>
+<td>Implied Volatility of the put option</td>
+</tr>
+<tr>
+<td>P_VOLUME</td>
 <td>29.000000</td>
+<td>Trading volume of the put option</td>
+</tr>
+<tr>
+<td>STRIKE_DISTANCE</td>
 <td>76.800000</td>
+<td>Distance from the strike price</td>
+</tr>
+<tr>
+<td>STRIKE_DISTANCE_PCT</td>
 <td>0.018000</td>
+<td>Percentage distance from the strike price</td>
 </tr>
 </tbody>
 </table>
-<p>Please review this table to ensure the data is correctly aligned and accurately represented. If there are any specific formatting or content adjustments needed, feel free to let me know!</p>
-<h2 id="1-begin-with-sorting-my-iv-data">1. Begin with sorting my IV data </h2>
-<h2 id="2-compute-your-dependent-variable-and-run-the-fitting-on-δbsδ2bs">2. Compute your dependent variable and run the fitting on δBS,δ2BS </h2>
-<h2 id="1-首先对隐含波动率数据进行排序---或者每个交易日您将需要bs期权价格作为隐含波动率百分比-希腊值δ和vegavt-δbs-νbs期权到期结构为1m-3m-6m-9m-12m不需要每周到期在这里需要做出关键选择如果您要研究虚值看涨期权的delta除了约在atm范围内的045--δbs--055之外---每个行权价都意味着为每个到期日分别建立一个a-b-c的历史">1. 首先，对隐含波动率数据进行排序 - 或者每个交易日，您将需要BS期权价格作为隐含波动率百分比、希腊值δ和vega：(Vt, δBS, νBS)。期权到期结构为1M、3M、6M、9M、12M，不需要每周到期。在这里需要做出关键选择，如果您要研究虚值看涨期权的Delta，除了约在ATM范围内的0.45 &lt; δBS &lt; 0.55之外 - 每个行权价都意味着为每个到期日分别建立一个a、b、c的历史 </h2>
-<h2 id="2-计算你的因变量并在δbsδ2bs上进行拟合基于每日期权价格变动vt的依赖方面你将需要-st-st-以及上述提到的希腊值确切的数据列将取决于你如何组织回归或进行-slsqp">2. 计算你的因变量并在δBS，δ2BS上进行拟合。基于每日期权价格变动∆Vt的依赖方面，你将需要 (∆St, St) 以及上述提到的希腊值。确切的数据列将取决于你如何组织回归或进行 SLSQP </h2>
-<h2 id="3-对于研究项目参数a-b-c可以是常数但滚动估计本身是一种校准技术因为对于每个到期日你有时变的a-b-c不是3个常数hull-white的建议是使用3个月的滚动窗口然后将开始日期向后移动一天3--22个观测值--你可以使用更短更长的周期进行估计或者向后移动5-10天还要记住期权的隐含波动率可以从均匀分布的配方中模拟出来">3. 对于研究项目，参数a、b、c可以是常数，但滚动估计本身是一种校准技术，因为对于每个到期日，你有时变的a、b、c（不是3个常数）。Hull White的建议是使用3个月的滚动窗口，然后将开始日期向后移动一天（3 × 22个观测值）- 你可以使用更短/更长的周期进行估计，或者向后移动5-10天。还要记住，期权的隐含波动率可以从均匀分布的配方中模拟出来 </h2>
-<h2 id="4-对于模型验证查看a-b-c随时间的变化---我们使用回归作为拟合工具因此它们甚至可能不具有统计显著性检查如果δmv---δbs给出一个反向的抛物线形状绘制预期隐含波动率变化与delta的关系">4. 对于模型验证，查看a、b、c随时间的变化 - 我们使用回归作为拟合工具，因此它们甚至可能不具有统计显著性。检查如果δMV - δBS给出一个（反向的）抛物线形状，绘制预期隐含波动率变化与Delta的关系 </h2>
-<h2 id="5-eσimp-预计为负值但可能不是您实现的对冲收益是否接近15并且在哪些delta桶和到期日中">5. E[∆σimp] 预计为负值，但可能不是。您实现的对冲收益是否接近15%，并且在哪些Delta桶和到期日中？ </h2>
+<h2 id="1-data-preprocessing">1. Data Preprocessing </h2>
+<p>My data is sorted in ascending order by trading days. Since my data includes pre-existing data on Days to Expiry (DTE), I need to define different ETD (Expiry Term Structure) ranges to filter options with expiry structures of 1M, 3M, 6M, 9M, and 12M.</p>
+<p>Since the actual expiry dates won't exactly match 1M, 3M, etc., I will define a reasonably relative range for each term structure as follows:</p>
+<ul>
+<li>
+<p><strong>Extracting and Calculating Required Metrics</strong><br>
+The SPX data I downloaded already includes the following fields:</p>
+<ul>
+<li>Black-Scholes Option Price (Vt)</li>
+<li>Implied Volatility Percentage (IV%)</li>
+<li>Black-Scholes Delta</li>
+<li>Black-Scholes Vega</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Term Structures</strong><br>
+<strong>1M</strong>: 30 ± 1 * 15, i.e., 15 &lt;= DTE &lt;= 45<br>
+<strong>3M</strong>: 30 ± 3 * 15, i.e., 75 &lt;= DTE &lt;= 105<br>
+<strong>6M</strong>: 30 ± 6 * 15, i.e., 165 &lt;= DTE &lt;= 195<br>
+<strong>9M</strong>: 30 ± 9 * 15, i.e., 255 &lt;= DTE &lt;= 285<br>
+<strong>12M</strong>: 30 ± 12 * 15, i.e., 345 &lt;= DTE &lt;= 375</p>
+</li>
+<li>
+<p><strong>Handling Delta Ranges</strong><br>
+Since I will be studying Delta for out-of-the-money (OTM) call strikes, I need to filter data for ATM (At-The-Money) buckets with 0.45 &lt; delta &lt; 0.55. Additionally, I need to calculate model parameters a, b, c for the Minimum Variance Delta (MVD) implementation to adjust Black-Scholes Delta, considering expected changes in implied volatility due to asset price movements. In this project, I will use the least squares method to estimate the values of a, b, and c.</p>
+</li>
+</ul>
+<p>Based on the above steps, I have completed the processing of SPX data from 2021 to 2023, totaling 128,258 options data entries.</p>
+<hr>
+<h2 id="2-data-preprocessing">2. Data Preprocessing </h2>
+<p>You need to perform Exploratory Data Analysis (EDA) on the data, including checking data distribution characteristics, identifying and handling outliers, and normalizing or standardizing variables. Additionally, since option data is time-series data, it's important to consider time dependencies and possible lag effects.</p>
+<ul>
+<li><strong>Descriptive Data: Examine the first few rows of the data to understand its structure and types</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>head<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><ul>
+<li><strong>Descriptive Statistical Analysis: Obtain a statistical summary of the data, including mean, standard deviation, minimum, maximum, etc.</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>describe<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><ul>
+<li><strong>Check for Missing Values: Identify missing values in the data and decide how to handle them (e.g., fill or delete)</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>isnull<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># You can choose to fill missing values or delete rows with missing values.</span>
+<span class="token comment"># data.fillna(method='ffill', inplace=True)</span>
+<span class="token comment"># data.dropna(inplace=True)</span>
+</code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>&lt;!-- output --&gt;
+data.isnull().sum() QUOTE_DATE          0
+UNDERLYING_LAST     0
+DTE                 0
+C_DELTA             0
+C_GAMMA             0
+C_VEGA              0
+C_THETA             0
+C_RHO               0
+C_IV                0
+C_LAST              0
+STRIKE              0
+EXPIRE_STRUCTURE    0
+∆St                 0
+∆St/St              0
+RETURNS             0
+∆Vt                 0
+dtype: int64
+&lt;!-- The output result is 0, indicating that there are no missing values in the data, so there is no need for missing value processing. --&gt;
+</code></pre><ul>
+<li><strong>Identify and Handle Outliers: Use box plots to identify outliers</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword keyword-as">as</span> plt
+
+<span class="token comment"># Example using ∆Vt, plot a box plot</span>
+plt<span class="token punctuation">.</span>boxplot<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>dropna<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Box Plot of ∆Vt'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># can use the IQR (Interquartile Range) rule to filter outliers</span>
+Q1 <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>quantile<span class="token punctuation">(</span><span class="token number">0.25</span><span class="token punctuation">)</span>
+Q3 <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>quantile<span class="token punctuation">(</span><span class="token number">0.75</span><span class="token punctuation">)</span>
+IQR <span class="token operator">=</span> Q3 <span class="token operator">-</span> Q1
+<span class="token builtin">filter</span> <span class="token operator">=</span> <span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span> <span class="token operator">&gt;=</span> Q1 <span class="token operator">-</span> <span class="token number">1.5</span> <span class="token operator">*</span> IQR<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> Q3 <span class="token operator">+</span> <span class="token number">1.5</span> <span class="token operator">*</span> IQR<span class="token punctuation">)</span>
+data <span class="token operator">=</span> data<span class="token punctuation">.</span>loc<span class="token punctuation">[</span><span class="token builtin">filter</span><span class="token punctuation">]</span>
+</code></pre><img src="Box Plot of ∆Vt.png" width="300px">
+<p>We can see that there are multiple outliers, which are shown as isolated points above and below the box. As shown in the plot, several points are located outside the upper and lower edges of the box, and these points are the outliers in the data. They can generally be ignored.</p>
+<ul>
+<li><strong>Normalization or Standardization of Variables: To make the model more stable and converge faster, normalize or standardize numerical variables</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> sklearn<span class="token punctuation">.</span>preprocessing <span class="token keyword keyword-import">import</span> StandardScaler<span class="token punctuation">,</span> MinMaxScaler
+
+<span class="token comment"># Standardization (Z-score Standardization)</span>
+scaler <span class="token operator">=</span> StandardScaler<span class="token punctuation">(</span><span class="token punctuation">)</span>
+data<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'∆St'</span><span class="token punctuation">,</span> <span class="token string">'∆St/St'</span><span class="token punctuation">,</span> <span class="token string">'RETURNS'</span><span class="token punctuation">,</span> <span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> scaler<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'∆St'</span><span class="token punctuation">,</span> <span class="token string">'∆St/St'</span><span class="token punctuation">,</span> <span class="token string">'RETURNS'</span><span class="token punctuation">,</span> <span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Or normalize to [0, 1] range</span>
+<span class="token comment"># scaler = MinMaxScaler()</span>
+<span class="token comment"># data[['∆St', '∆St/St', 'RETURNS', '∆Vt']] = scaler.fit_transform(data[['∆St', '∆St/St', 'RETURNS', '∆Vt']])</span>
+</code></pre><ul>
+<li><strong>Data Distribution Characteristics: Use histograms and Q-Q plots to check if data is close to a normal distribution</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-import">import</span> norm
+<span class="token keyword keyword-import">import</span> seaborn <span class="token keyword keyword-as">as</span> sns
+<span class="token keyword keyword-import">import</span> scipy<span class="token punctuation">.</span>stats <span class="token keyword keyword-as">as</span> stats
+
+<span class="token comment"># Plot a histogram</span>
+sns<span class="token punctuation">.</span>histplot<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> kde<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Histogram of ∆Vt'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Plot a Q-Q</span>
+stats<span class="token punctuation">.</span>probplot<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dist<span class="token operator">=</span><span class="token string">"norm"</span><span class="token punctuation">,</span> plot<span class="token operator">=</span>plt<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Q-Q Plot of ∆Vt'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><img src="Histogram of ∆Vt.png" width="300px">
+<img src="Q-Q Plot of ∆Vt.png" width="300px">
+<p>Based on these two plots, we can infer that the data is approximately normally distributed around the center but exhibits heavy tails, especially positive skewness. This indicates that the dataset contains some values that are much larger than the mean. These extreme values might be the outliers observed earlier in the box plot.</p>
+<ul>
+<li><strong>Time Series Analysis: Check for trends, seasonality, etc.</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code>data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pd<span class="token punctuation">.</span>to_datetime<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+data<span class="token punctuation">.</span>set_index<span class="token punctuation">(</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">,</span> inplace<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Plot a time series</span>
+data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Time Series Plot of ∆Vt'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><img src="Time Series Plot of ∆Vt.png" width="300px">
+<p>The data seems to fluctuate around a constant level for most of the time, without a clear long-term upward or downward trend. Also, there is no evident repetitive pattern, indicating that there may be no seasonality in the data.</p>
+<ul>
+<li><strong>Stationarity Testing: ADF (Augmented Dickey-Fuller) Test</strong></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-from">from</span> statsmodels<span class="token punctuation">.</span>tsa<span class="token punctuation">.</span>stattools <span class="token keyword keyword-import">import</span> adfuller
+
+result <span class="token operator">=</span> adfuller<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>dropna<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">'ADF Statistic: %f'</span> <span class="token operator">%</span> result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">'p-value: %f'</span> <span class="token operator">%</span> result<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">'Critical Values:'</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-for">for</span> key<span class="token punctuation">,</span> value <span class="token keyword keyword-in">in</span> result<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">'\t%s: %.3f'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Based on the ADF test result, if the p-value is less than the significance level (usually 0.05), then reject the null hypothesis and consider the series stationary.</span>
+</code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>&lt;!-- output --&gt;
+ADF Statistic: -113.504823
+p-value: 0.000000
+Critical Values:
+	1%: -3.430
+	5%: -2.862
+	10%: -2.567
+</code></pre><p>The ADF statistic is much smaller than the critical values at 1%, 5%, and 10% levels. This means that I can reject the null hypothesis of non-stationarity at these confidence levels, and consider the time series to be stationary. This usually means that the time series does not have a trend and can be further analyzed, and time series forecasting models can be built.</p>
+<hr>
+<h2 id="3-estimate-a-b-c-using-rolling-calculation">3. Estimate a, b, c using rolling calculation </h2>
+<ul>
+<li>Data Preprocessing: Ensure data cleanliness, handle any missing values or outliers.</li>
+<li>Data Segmentation: Split the data into different subsets based on TERM_STRUCTURE.</li>
+<li>Rolling Window Estimation: For each option expiration date, estimate parameters using a rolling window of 3 months.</li>
+<li>GARCH Model Fitting: Fit a GARCH model using historical volatility data to obtain volatility forecasts.</li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> time
+<span class="token keyword keyword-from">from</span> multiprocessing <span class="token keyword keyword-import">import</span> cpu_count
+<span class="token keyword keyword-import">import</span> pandas <span class="token keyword keyword-as">as</span> pd
+<span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
+<span class="token keyword keyword-from">from</span> arch <span class="token keyword keyword-import">import</span> arch_model
+<span class="token keyword keyword-from">from</span> matplotlib <span class="token keyword keyword-import">import</span> pyplot <span class="token keyword keyword-as">as</span> plt
+<span class="token keyword keyword-from">from</span> pandas <span class="token keyword keyword-import">import</span> concat
+<span class="token keyword keyword-from">from</span> scipy<span class="token punctuation">.</span>optimize <span class="token keyword keyword-import">import</span> minimize
+<span class="token keyword keyword-from">from</span> tqdm <span class="token keyword keyword-import">import</span> tqdm
+<span class="token keyword keyword-from">from</span> tqdm<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>concurrent <span class="token keyword keyword-import">import</span> process_map
+
+<span class="token comment"># Create an empty DataFrame to store estimation results</span>
+results <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Define a function to estimate parameters</span>
+<span class="token keyword keyword-def">def</span> <span class="token function">estimate_params</span><span class="token punctuation">(</span>iv<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> vega<span class="token punctuation">,</span> dVt<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword keyword-def">def</span> <span class="token function">objective</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> iv<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> vega<span class="token punctuation">,</span> dVt<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c <span class="token operator">=</span> params
+        delta_bs <span class="token operator">=</span> a <span class="token operator">*</span> iv <span class="token operator">+</span> b <span class="token operator">*</span> delta <span class="token operator">+</span> c <span class="token operator">*</span> vega
+        <span class="token keyword keyword-return">return</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">(</span>delta_bs <span class="token operator">-</span> dVt<span class="token punctuation">)</span> <span class="token operator">**</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+    initial_guess <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    bounds <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token operator">-</span>np<span class="token punctuation">.</span>inf<span class="token punctuation">,</span> np<span class="token punctuation">.</span>inf<span class="token punctuation">)</span><span class="token punctuation">]</span>
+    result <span class="token operator">=</span> minimize<span class="token punctuation">(</span>objective<span class="token punctuation">,</span> initial_guess<span class="token punctuation">,</span> args<span class="token operator">=</span><span class="token punctuation">(</span>iv<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> vega<span class="token punctuation">,</span> dVt<span class="token punctuation">)</span><span class="token punctuation">,</span> method<span class="token operator">=</span><span class="token string">'SLSQP'</span><span class="token punctuation">,</span> bounds<span class="token operator">=</span>bounds<span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-if">if</span> result<span class="token punctuation">.</span>success<span class="token punctuation">:</span>
+        <span class="token keyword keyword-return">return</span> result<span class="token punctuation">.</span>x
+    <span class="token keyword keyword-else">else</span><span class="token punctuation">:</span>
+        <span class="token keyword keyword-raise">raise</span> ValueError<span class="token punctuation">(</span><span class="token string">"Optimization failed"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Define a function to estimate volatility using GARCH model</span>
+<span class="token keyword keyword-def">def</span> <span class="token function">estimate_volatility</span><span class="token punctuation">(</span>returns<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    returns <span class="token operator">=</span> returns<span class="token punctuation">.</span>dropna<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    garch11 <span class="token operator">=</span> arch_model<span class="token punctuation">(</span>returns<span class="token punctuation">,</span> p<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> q<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+    res <span class="token operator">=</span> garch11<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>disp<span class="token operator">=</span><span class="token string">'off'</span><span class="token punctuation">)</span>
+    estimated_volatility <span class="token operator">=</span> res<span class="token punctuation">.</span>conditional_volatility
+    <span class="token keyword keyword-return">return</span> estimated_volatility
+
+<span class="token comment"># Define a function to process each subtask</span>
+<span class="token keyword keyword-def">def</span> <span class="token function">process_subtask</span><span class="token punctuation">(</span>subtask_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data_path <span class="token operator">=</span> <span class="token string">'processed_option_data.csv'</span>
+    data <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>data_path<span class="token punctuation">)</span>
+    data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pd<span class="token punctuation">.</span>to_datetime<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    rolling_window_size <span class="token operator">=</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">22</span>
+    results <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-for">for</span> term <span class="token keyword keyword-in">in</span> subtask_data<span class="token punctuation">[</span><span class="token string">'EXPIRE_STRUCTURE'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>unique<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        term_data <span class="token operator">=</span> subtask_data<span class="token punctuation">[</span>subtask_data<span class="token punctuation">[</span><span class="token string">'EXPIRE_STRUCTURE'</span><span class="token punctuation">]</span> <span class="token operator">==</span> term<span class="token punctuation">]</span>
+
+        <span class="token keyword keyword-for">for</span> strike <span class="token keyword keyword-in">in</span> term_data<span class="token punctuation">[</span><span class="token string">'STRIKE'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>unique<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            strike_data <span class="token operator">=</span> term_data<span class="token punctuation">[</span>term_data<span class="token punctuation">[</span><span class="token string">'STRIKE'</span><span class="token punctuation">]</span> <span class="token operator">==</span> strike<span class="token punctuation">]</span>
+
+            <span class="token keyword keyword-for">for</span> i <span class="token keyword keyword-in">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>rolling_window_size<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>strike_data<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                window_data <span class="token operator">=</span> strike_data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span>i <span class="token operator">-</span> rolling_window_size<span class="token punctuation">:</span>i<span class="token punctuation">]</span>
+                iv <span class="token operator">=</span> window_data<span class="token punctuation">[</span><span class="token string">'C_IV'</span><span class="token punctuation">]</span>
+                delta <span class="token operator">=</span> window_data<span class="token punctuation">[</span><span class="token string">'C_DELTA'</span><span class="token punctuation">]</span>
+                vega <span class="token operator">=</span> window_data<span class="token punctuation">[</span><span class="token string">'C_VEGA'</span><span class="token punctuation">]</span>
+                dVt <span class="token operator">=</span> window_data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span>
+
+                <span class="token keyword keyword-try">try</span><span class="token punctuation">:</span>
+                    param_a<span class="token punctuation">,</span> param_b<span class="token punctuation">,</span> param_c <span class="token operator">=</span> estimate_params<span class="token punctuation">(</span>iv<span class="token punctuation">,</span> delta<span class="token punctuation">,</span> vega<span class="token punctuation">,</span> dVt<span class="token punctuation">)</span>
+
+                    results <span class="token operator">=</span> concat<span class="token punctuation">(</span><span class="token punctuation">[</span>results<span class="token punctuation">,</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span><span class="token punctuation">{</span>
+                        <span class="token string">'QUOTE_DATE'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>window_data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'STRIKE'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>strike<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'TERM'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>term<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'PARAM_A'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>param_a<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'PARAM_B'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>param_b<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'PARAM_C'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>param_c<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'C_IV'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>iv<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'C_DELTA'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>delta<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'C_VEGA'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>vega<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        <span class="token string">'∆Vt'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>dVt<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ignore_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+                <span class="token keyword keyword-except">except</span> ValueError<span class="token punctuation">:</span>
+                    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Optimization failed for window ending on </span><span class="token interpolation"><span class="token punctuation">{</span>window_data<span class="token punctuation">.</span>iloc<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span><span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+    <span class="token keyword keyword-return">return</span> results
+
+<span class="token keyword keyword-def">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data_path <span class="token operator">=</span> <span class="token string">'processed_option_data.csv'</span>
+    data <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>data_path<span class="token punctuation">)</span>
+    data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span> <span class="token operator">=</span> pd<span class="token punctuation">.</span>to_datetime<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    num_subtasks <span class="token operator">=</span> cpu_count<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    subtasks <span class="token operator">=</span> np<span class="token punctuation">.</span>array_split<span class="token punctuation">(</span>data<span class="token punctuation">,</span> num_subtasks<span class="token punctuation">)</span>
+    results_list <span class="token operator">=</span> process_map<span class="token punctuation">(</span>process_subtask<span class="token punctuation">,</span> subtasks<span class="token punctuation">,</span> max_workers<span class="token operator">=</span>num_subtasks<span class="token punctuation">,</span> chunksize<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+    results <span class="token operator">=</span> pd<span class="token punctuation">.</span>concat<span class="token punctuation">(</span>results_list<span class="token punctuation">,</span> ignore_index<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>results<span class="token punctuation">)</span>
+    results<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span><span class="token string">'new_processed_option_data_with_abc.csv'</span><span class="token punctuation">,</span> index<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+<span class="token keyword keyword-if">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre><hr>
+<h2 id="4-plot-and-verify">4. Plot and Verify </h2>
+<pre data-role="codeBlock" data-info="python" class="language-python python"><code><span class="token keyword keyword-import">import</span> numpy <span class="token keyword keyword-as">as</span> np
+<span class="token keyword keyword-import">import</span> pandas <span class="token keyword keyword-as">as</span> pd
+<span class="token keyword keyword-from">from</span> matplotlib <span class="token keyword keyword-import">import</span> pyplot <span class="token keyword keyword-as">as</span> plt
+
+data <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span><span class="token string">'/Users/nanjiang/cqf/new_processed_option_data_with_abc.csv'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Here, delta_bs can be understood as the model estimated value, where a, b, and c are model parameters.</span>
+<span class="token comment"># In my model, the partial derivative with respect to Delta is relatively simple because the model is linear.</span>
+<span class="token comment"># The model's estimated Delta can be directly obtained from my model, which is the coefficient b.</span>
+MODEL_DELTA_EST <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'PARAM_B'</span><span class="token punctuation">]</span>
+
+<span class="token comment"># Check the shape of δMV−δBS</span>
+data<span class="token punctuation">[</span><span class="token string">'δMV'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'∆St'</span><span class="token punctuation">]</span>
+
+<span class="token comment"># Plot IV Change vs Delta</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'C_DELTA'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token string">'C_IV'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'Actual IV Change'</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'C_DELTA'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token string">'C_IV'</span><span class="token punctuation">]</span> <span class="token operator">+</span> data<span class="token punctuation">[</span><span class="token string">'δMV'</span><span class="token punctuation">]</span> <span class="token operator">-</span> MODEL_DELTA_EST<span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'Expected IV Change (IV + δMV−δBS)'</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Delta (C_DELTA)'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'IV Change'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Expected vs Actual IV Change'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Calculate E[∆σimp]</span>
+data<span class="token punctuation">[</span><span class="token string">'E_∆σimp'</span><span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'C_IV'</span><span class="token punctuation">]</span> <span class="token operator">+</span> data<span class="token punctuation">[</span><span class="token string">'δMV'</span><span class="token punctuation">]</span> <span class="token operator">-</span> MODEL_DELTA_EST
+
+<span class="token comment"># Calculate the average of E[∆σimp]</span>
+mean_E_σimp <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token string">'E_∆σimp'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"Average E[∆σimp]: </span><span class="token interpolation"><span class="token punctuation">{</span>mean_E_σimp<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment"># Calculate Hedging Gain</span>
+data<span class="token punctuation">[</span><span class="token string">'Hedging_Gain'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>data<span class="token punctuation">[</span><span class="token string">'E_∆σimp'</span><span class="token punctuation">]</span> <span class="token operator">*</span> data<span class="token punctuation">[</span><span class="token string">'C_VEGA'</span><span class="token punctuation">]</span> <span class="token operator">*</span> data<span class="token punctuation">[</span><span class="token string">'∆Vt'</span><span class="token punctuation">]</span> <span class="token operator">/</span> data<span class="token punctuation">[</span><span class="token string">'C_IV'</span><span class="token punctuation">]</span>
+
+<span class="token comment"># Plot Hedging Gain vs Delta</span>
+plt<span class="token punctuation">.</span>scatter<span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'C_DELTA'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token string">'Hedging_Gain'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'Hedging Gain'</span><span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>axhline<span class="token punctuation">(</span>y<span class="token operator">=</span><span class="token number">0.15</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'r'</span><span class="token punctuation">,</span> linestyle<span class="token operator">=</span><span class="token string">'--'</span><span class="token punctuation">,</span> label<span class="token operator">=</span><span class="token string">'15% Hedging Gain'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlabel<span class="token punctuation">(</span><span class="token string">'Delta (C_DELTA)'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>ylabel<span class="token punctuation">(</span><span class="token string">'Hedging Gain'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Hedging Gain vs Delta'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>legend<span class="token punctuation">(</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Find Delta buckets and expiration dates that satisfy a 15% Hedging Gain</span>
+profitable_trades <span class="token operator">=</span> data<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token string">'Hedging_Gain'</span><span class="token punctuation">]</span> <span class="token operator">&gt;=</span> <span class="token number">0.15</span><span class="token punctuation">]</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span><span class="token string">"Trades satisfying a 15% Hedging Gain:"</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>profitable_trades<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'QUOTE_DATE'</span><span class="token punctuation">,</span> <span class="token string">'C_DELTA'</span><span class="token punctuation">,</span> <span class="token string">'Hedging_Gain'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+profitable_percent <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>profitable_trades<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token builtin">len</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">'Hedging_Gain'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-print">print</span><span class="token punctuation">(</span>profitable_percent<span class="token punctuation">)</span>
+
+</code></pre><p><strong>We can see from the plot, my achieved hedging Gain any-<br>
+where close to 15%</strong></p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>&lt;!-- output --&gt;
+The average E[∆σimp] is approximately -0.6096.
+
+Here are the trades that satisfy a 15% hedging gain condition, along with their quote dates, C_DELTA values, and hedging gains:
+
+0.5098697644869992
+Trades that meet a 15% hedge gain:
+       QUOTE_DATE  C_DELTA  Hedging_Gain
+0      2021-02-02  0.52459    192.164259
+9      2021-02-03  0.53205     35.249656
+12     2021-02-03  0.52897     66.751835
+20     2021-02-25  0.52732     18.991600
+21     2021-02-25  0.52831     28.207716
+...           ...      ...           ...
+22030  2023-12-29  0.48147    127.113390
+22033  2023-12-29  0.50559     55.335186
+22034  2023-12-29  0.50647      7.430112
+22035  2023-12-29  0.48833    262.031500
+22036  2023-12-29  0.49123     46.574026
+
+[11236 rows x 3 columns]
+...
+
+These trades have hedging gains that meet or exceed the 15% hedging gain threshold.
+</code></pre><p>And we can calculate there are 0.5098697644869992 trades which means nearly a half of all trades that meet or exceed the 15% hedging gain.</p>
+<hr>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });</script>
 
