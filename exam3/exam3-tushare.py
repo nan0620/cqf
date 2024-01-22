@@ -7,7 +7,6 @@ import tushare as ts
 # 咸鱼token
 pro = ts.pro_api('1a312d7a80c6fcc1fd0a28116f8a1988b6756189d4db76e5bc603031')
 
-
 # 上海梅林 600073.SH
 df = pro.daily(ts_code='600073.SH', start_date='2001-01-01', end_date='2022-12-31')
 print(df)
